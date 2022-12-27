@@ -3,7 +3,7 @@
     "target": "es5",
     "baseUrl": "src",
     "paths": {
-      "@component/*": ["src/components/*"],
+      "@components/*": ["src/components/*"],
       "@pages/*": ["src/pages/*"],
       "@features/*": ["src/features/*"],
       "@themes/*": ["src/themes/*"]
