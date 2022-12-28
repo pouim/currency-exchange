@@ -1,12 +1,17 @@
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import { grey } from "@mui/material/colors";
 
 import { PanelProps } from "./types";
 
-function Panel({ title, children }: PanelProps) {
+function Panel({ children }: PanelProps) {
   return (
-    <Box sx={{ background: grey[300], height: "100vh" }} px={22} py={8}>
-      <Typography variant="h1" mb={5}>{title}</Typography>
+    <Box
+      display="flex"
+      justifyContent="center"
+      pt={5}
+      px={{ s: 1, md: 0 }}
+      sx={{ background: grey[300], height: "100vh" }}
+    >
       {children}
     </Box>
   );

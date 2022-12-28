@@ -29,8 +29,12 @@ export const theme: ThemeOptions = createTheme({
     fontFamily: "Roboto, sans-serif",
 
     h1: {
-      fontSize: 48,
+      fontSize: 36,
       fontWeight: "bold",
+
+      "@media (min-width:1200px)": {
+        fontSize: 48
+      },
     },
 
     h2: {
