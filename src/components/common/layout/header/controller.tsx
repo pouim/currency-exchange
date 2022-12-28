@@ -1,8 +1,10 @@
-import { useCallback, useState } from "react";
+import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 
 import { useIsDesktop } from "helpers/hooks";
 import HeaderMobileView from "./header-mobile.view";
 import HeaderView from "./header.view";
+import { TabValues } from "./types";
 
 export function a11yProps(index: number) {
   return {
@@ -15,24 +17,19 @@ function HeaderController() {
   const [value, setValue] = useState(0);
 
   const isDesktop = useIsDesktop();
+  const location = useLocation();
 
-  /**
-   * @function handleTabsChange
-   * @param { React.SyntheticEvent } event
-   * @param { number } newValue
-   * @returns { void }
-   */
-  const handleTabsChange = useCallback(
-    (event: React.SyntheticEvent, newValue: number) => {
-      setValue(newValue);
-    },
-    []
-  );
+  useEffect(() => {
+    const tabValue =
+      TabValues[location.pathname.slice(1) as keyof typeof TabValues];
+
+    setValue(tabValue);
+  }, [location.pathname]);
 
   return isDesktop ? (
-    <HeaderView value={value} handleTabsChange={handleTabsChange} />
+    <HeaderView value={value} />
   ) : (
-    <HeaderMobileView value={value} handleTabsChange={handleTabsChange} />
+    <HeaderMobileView value={value} />
   );
 }
 

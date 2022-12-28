@@ -8,7 +8,7 @@ import { a11yProps } from "./controller";
 import { HeaderProps } from "./types";
 
 function HeaderMobileView(props: HeaderProps) {
-  const { value, handleTabsChange } = props;
+  const { value } = props;
 
   return (
     <Box>
@@ -27,7 +27,6 @@ function HeaderMobileView(props: HeaderProps) {
 
       <Tabs
         value={value}
-        onChange={handleTabsChange}
         variant="fullWidth"
         aria-label="basic tabs example"
         sx={{ marginLeft: 5 }}

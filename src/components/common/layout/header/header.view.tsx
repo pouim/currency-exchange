@@ -8,7 +8,7 @@ import { a11yProps } from "./controller";
 import { HeaderProps } from "./types";
 
 function HeaderView(props: HeaderProps) {
-  const { value, handleTabsChange} = props;
+  const { value } = props;
 
   return (
     <Box display="flex" alignItems="flex-end" justifyContent="space-around">
@@ -17,7 +17,6 @@ function HeaderView(props: HeaderProps) {
 
         <Tabs
           value={value}
-          onChange={handleTabsChange}
           aria-label="basic tabs example"
           sx={{ marginLeft: 5 }}
         >
