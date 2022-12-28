@@ -8,9 +8,9 @@ function Panel({ children }: PanelProps) {
     <Box
       display="flex"
       justifyContent="center"
-      pt={5}
+      py={5}
       px={{ s: 1, md: 0 }}
-      sx={{ background: grey[300], height: "100vh" }}
+      sx={{ background: grey[300], height: { lg: "100vh" } }}
     >
       {children}
     </Box>

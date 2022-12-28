@@ -29,11 +29,15 @@ export const theme: ThemeOptions = createTheme({
     fontFamily: "Roboto, sans-serif",
 
     h1: {
-      fontSize: 36,
+      fontSize: 20,
       fontWeight: "bold",
 
+      "@media (min-width:700px)": {
+        fontSize: 36,
+      },
+
       "@media (min-width:1200px)": {
-        fontSize: 48
+        fontSize: 48,
       },
     },
 

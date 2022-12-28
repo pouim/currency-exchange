@@ -17,7 +17,7 @@ function AppTable(props: AppTableProps) {
   const headers = Object.keys(tableData[0]);
 
   return (
-    <TableContainer component={Paper}>
+    <TableContainer component={Paper} sx={{ maxHeight: 300 }}>
       <Table aria-label="simple table">
         <TableHead>
           <TableRow>

@@ -45,7 +45,8 @@ function ExchangeView() {
         flexDirection="column"
         alignItems="center"
         justifyContent="center"
-        p={8}
+        px={8}
+        pt={5}
       >
         <Box display="flex" mb={2}>
           <Typography variant="h1" color="text.primary" fontWeight={300}>
