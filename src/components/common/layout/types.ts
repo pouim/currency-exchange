@@ -1,10 +1,8 @@
-import { ReactNode } from "react";
-
 export type TabConfigurationType = {
   label: string;
-  children: ReactNode;
+  pathName: string;
 };
 
 export interface LayoutProps {
-  tabs: TabConfigurationType[];
+  title?: string;
 }

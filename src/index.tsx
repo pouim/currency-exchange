@@ -5,13 +5,12 @@ import "@fontsource/roboto/700.css";
 
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { RouterProvider } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ThemeProvider } from "@emotion/react";
 
 import "./index.css";
 import { theme } from "./themes";
-import { router } from "./config/routes";
+import App from "App";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -24,7 +23,7 @@ root.render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={theme}>
-        <RouterProvider router={router} />
+          <App />
       </ThemeProvider>
     </QueryClientProvider>
   </React.StrictMode>

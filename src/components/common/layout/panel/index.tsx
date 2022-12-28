@@ -6,7 +6,7 @@ import { PanelProps } from "./types";
 function Panel({ title, children }: PanelProps) {
   return (
     <Box sx={{ background: grey[300], height: "100vh" }} px={22} py={8}>
-      <Typography variant="h1">{title}</Typography>
+      <Typography variant="h1" mb={5}>{title}</Typography>
       {children}
     </Box>
   );

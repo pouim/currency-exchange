@@ -1,10 +1,13 @@
 import { useState } from "react";
-import { Box, Button, Tab, Tabs } from "@mui/material";
+import { Route, Routes } from "react-router-dom";
+import { Box, Button, Tabs } from "@mui/material";
 
 import Logo from "./logo";
 import { isDesktop } from "../../../helpers/function";
+import { tabsData } from "./constants";
+import { Routings } from "config/routes";
+import LinkTab from "./link-tab";
 import { LayoutProps } from "./types";
-import TabPanel from "./tab-panel";
 
 function a11yProps(index: number) {
   return {
@@ -13,12 +16,10 @@ function a11yProps(index: number) {
   };
 }
 
-function Layout(props: LayoutProps) {
-  const { tabs } = props;
-
+function Layout({ title = "" }: LayoutProps) {
   const [value, setValue] = useState(0);
 
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+  const handleTabsChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
 
@@ -31,25 +32,33 @@ function Layout(props: LayoutProps) {
           <Logo />
 
           <Tabs
-            value={value}
             variant={!isItDesktop ? "fullWidth" : "standard"}
-            onChange={handleChange}
+            value={value}
+            onChange={handleTabsChange}
             aria-label="basic tabs example"
             sx={{ marginLeft: 5 }}
           >
-            {tabs.map(({ label }, index) => (
-              <Tab label={label} {...a11yProps(index)} />
-            ))}
+            {tabsData.map(({ label, pathName }, index) => {
+              return (
+                <LinkTab
+                  key={pathName}
+                  label={label}
+                  pathName={pathName}
+                  {...a11yProps(index)}
+                />
+              );
+            })}
           </Tabs>
         </Box>
 
         <Button>Logout</Button>
       </Box>
-      {tabs.map(({ children }, index) => (
-        <TabPanel value={value} index={index}>
-          {children}
-        </TabPanel>
-      ))}
+
+      <Routes>
+        {Routings.map(({ path, element }) => (
+          <Route key={path} path={path} element={element} />
+        ))}
+      </Routes>
     </Box>
   );
 }

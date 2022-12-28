@@ -1,8 +1,13 @@
-import Layout from "./components/common/layout";
-import { tabsData } from "./components/common/layout/constants";
+import { BrowserRouter } from "react-router-dom";
+
+import Layout from "components/common/layout";
 
 function App() {
-  return <Layout tabs={tabsData} />;
+  return (
+    <BrowserRouter>
+      <Layout />
+    </BrowserRouter>
+  );
 }
 
 export default App;
