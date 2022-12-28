@@ -1,12 +1,12 @@
+import { Controller } from "react-hook-form";
 import { Autocomplete, createFilterOptions, TextField } from "@mui/material";
 
 import { AutoCompleteInputProps } from "./types";
 
 const filter = createFilterOptions<string>();
-const symbols: string[] = [];
 
 function AutoCompleteInput(props: AutoCompleteInputProps) {
-  const { label } = props;
+  const { name, label, control, options } = props;
 
   return (
     <Autocomplete
@@ -19,13 +19,24 @@ function AutoCompleteInput(props: AutoCompleteInputProps) {
       clearOnBlur
       handleHomeEndKeys
       id={label}
-      options={symbols}
+      options={options}
       getOptionLabel={(option) => option}
       renderOption={(props, option) => <li {...props}>{option}</li>}
       sx={{ width: { xs: "100%", lg: 300 } }}
       freeSolo
       renderInput={(params) => (
-        <TextField variant="standard" {...params} label={label} />
+        <Controller
+          name={name}
+          control={control}
+          render={({ field }) => (
+            <TextField
+              variant="standard"
+              {...params}
+              label={label}
+              {...field}
+            />
+          )}
+        />
       )}
     />
   );

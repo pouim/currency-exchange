@@ -1,24 +1,46 @@
+import { Controller } from "react-hook-form";
 import { Box, Button, TextField, Typography } from "@mui/material";
 import CompareArrowsIcon from "@mui/icons-material/CompareArrows";
 
 import AutoCompleteInput from "components/ui/auto-complete-input";
 import { PRIMARY_COLOR } from "themes/constants";
 import { ConvertorWrapper } from "./styles";
+import { ExchangeProps } from "./types";
+import { useGetAllSymbols } from "hooks";
 
-function ExchangeView() {
+function Exchange(props: ExchangeProps) {
+  const { handleConvert, control } = props;
+
+  const { data } = useGetAllSymbols();
+
+  const allSymbolsData = Object.keys(data?.symbols ?? []);
+
   return (
     <Box>
       <Typography variant="h1" color="text.primary">
         I want to convert
       </Typography>
-      <ConvertorWrapper>
-        <TextField
-          sx={{ width: { xs: "100%", lg: 350 } }}
-          variant="standard"
-          label="Amount"
+      <ConvertorWrapper onSubmit={handleConvert}>
+        <Controller
+          name="amount"
+          control={control}
+          render={({ field }) => (
+            <TextField
+              sx={{ width: { xs: "100%", lg: 350 } }}
+              variant="standard"
+              label="Amount"
+              {...field}
+            />
+          )}
         />
+
         <Box display="flex" alignItems="flex-end" gap="2%">
-          <AutoCompleteInput label="From" />
+          <AutoCompleteInput
+            name="from"
+            label="From"
+            control={control}
+            options={allSymbolsData}
+          />
           <Button
             variant="contained"
             sx={{
@@ -32,10 +54,15 @@ function ExchangeView() {
             <CompareArrowsIcon />
           </Button>
 
-          <AutoCompleteInput label="To" />
+          <AutoCompleteInput
+            name="to"
+            label="To"
+            control={control}
+            options={allSymbolsData}
+          />
         </Box>
 
-        <Button sx={{ height: 35 }} variant="contained">
+        <Button sx={{ height: 35 }} variant="contained" type="submit">
           Convert
         </Button>
       </ConvertorWrapper>
@@ -66,4 +93,4 @@ function ExchangeView() {
   );
 }
 
-export default ExchangeView;
+export default Exchange;

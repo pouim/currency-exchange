@@ -61,7 +61,7 @@ const call = async <T, D>(
   }
 };
 
-const get = <T, D = any>(url: string, data: D) => call<T, D>("get", url, data);
+const get = <T, D = any>(url: string, data?: D) => call<T, D>("get", url, data);
 
 const post = <T, D = any>(url: string, data?: D) =>
   call<T, D>("post", url, data);
