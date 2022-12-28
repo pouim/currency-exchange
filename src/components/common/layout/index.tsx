@@ -3,11 +3,10 @@ import { Route, Routes } from "react-router-dom";
 import { Box, Button, Tabs } from "@mui/material";
 
 import Logo from "./logo";
-import { isDesktop } from "../../../helpers/function";
 import { tabsData } from "./constants";
 import { Routings } from "config/routes";
 import LinkTab from "./link-tab";
-import { LayoutProps } from "./types";
+import { useIsDesktop } from "helpers/hooks";
 
 function a11yProps(index: number) {
   return {
@@ -16,14 +15,14 @@ function a11yProps(index: number) {
   };
 }
 
-function Layout({ title = "" }: LayoutProps) {
+function Layout() {
   const [value, setValue] = useState(0);
+
+  const isDesktop = useIsDesktop();
 
   const handleTabsChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
-
-  const isItDesktop = isDesktop();
 
   return (
     <Box sx={{ width: "100%" }}>
@@ -32,7 +31,7 @@ function Layout({ title = "" }: LayoutProps) {
           <Logo />
 
           <Tabs
-            variant={!isItDesktop ? "fullWidth" : "standard"}
+            variant={!isDesktop ? "fullWidth" : "standard"}
             value={value}
             onChange={handleTabsChange}
             aria-label="basic tabs example"

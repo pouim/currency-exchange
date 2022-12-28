@@ -1,4 +1,4 @@
-import { isEmpty, isDesktop } from "./index";
+import { isEmpty } from "./index";
 
 test("isEmpty function works correctly", () => {
   expect(isEmpty(null)).toBe(true);
@@ -21,16 +21,4 @@ test("isEmpty function works correctly", () => {
     )
   ).toBe(false);
   expect(isEmpty({ a: 1, b: 2, c: 3 })).toBe(false);
-});
-
-describe("isDesktop", () => {
-  it("returns true for desktop devices", () => {
-    Object.defineProperty(window, "innerWidth", { value: 769 });
-    expect(isDesktop()).toBe(true);
-  });
-
-  it("returns false for mobile devices", () => {
-    Object.defineProperty(window, "innerWidth", { value: 767 });
-    expect(isDesktop()).toBe(false);
-  });
 });

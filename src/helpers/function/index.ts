@@ -19,14 +19,3 @@ export function isEmpty(value: any): boolean {
   }
   return false;
 }
-
-/**
- * @function isDesktop
- * @returns { boolean }
- */
-export function isDesktop() {
-  if (typeof window !== "undefined") {
-    return window.innerWidth > 768;
-  }
-  return false;
-}
