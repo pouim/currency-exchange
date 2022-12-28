@@ -19,3 +19,18 @@ export function isEmpty(value: any): boolean {
   }
   return false;
 }
+
+/**
+ * @description to capitalize first letter of given string
+ * and replace '_' with space. 
+ * @function capitalize
+ * @param { string } string 
+ * @returns { string }
+ */
+export function capitalize(string: string): string {
+  // Replace _ with spaces
+  string = string.replace(/_/g, " ");
+
+  // Capitalize the first letter of the text
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}

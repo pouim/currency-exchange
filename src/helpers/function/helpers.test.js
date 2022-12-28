@@ -1,4 +1,4 @@
-import { isEmpty } from "./index";
+import { isEmpty, capitalize } from "./index";
 
 test("isEmpty function works correctly", () => {
   expect(isEmpty(null)).toBe(true);
@@ -21,4 +21,10 @@ test("isEmpty function works correctly", () => {
     )
   ).toBe(false);
   expect(isEmpty({ a: 1, b: 2, c: 3 })).toBe(false);
+});
+
+test("capitalize function works correctly", () => {
+  expect(capitalize("hello")).toBe("Hello");
+  expect(capitalize("hello_world")).toBe("Hello world");
+  expect(capitalize("hello-world")).toBe("Hello-world");
 });

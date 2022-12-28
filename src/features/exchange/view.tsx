@@ -1,7 +1,7 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
 import CompareArrowsIcon from "@mui/icons-material/CompareArrows";
 
-import AutoCompleteInput from "components/ui/auto-completel-input";
+import AutoCompleteInput from "components/ui/auto-complete-input";
 import { PRIMARY_COLOR } from "themes/constants";
 import { ConvertorWrapper } from "./styles";
 
