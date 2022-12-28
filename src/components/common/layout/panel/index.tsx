@@ -10,7 +10,7 @@ function Panel({ children }: PanelProps) {
       justifyContent="center"
       py={5}
       px={{ s: 1, md: 0 }}
-      sx={{ background: grey[300], height: { lg: "100vh" } }}
+      sx={{ background: grey[300], minHeight: "100%" }}
     >
       {children}
     </Box>

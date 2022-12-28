@@ -6,7 +6,7 @@ import ExchangeHistory from "features/exchange-history";
 
 function CurrencyConvertor() {
   return (
-    <Panel title="I want to convert">
+    <Panel>
       <Box>
         <Exchange />
         <ExchangeHistory />
