@@ -1,4 +1,4 @@
-import { Controller } from "react-hook-form";
+import { useEffect, useState } from "react";
 import { Autocomplete, createFilterOptions, TextField } from "@mui/material";
 
 import { AutoCompleteInputProps } from "./types";
@@ -6,7 +6,22 @@ import { AutoCompleteInputProps } from "./types";
 const filter = createFilterOptions<string>();
 
 function AutoCompleteInput(props: AutoCompleteInputProps) {
-  const { name, label, control, options } = props;
+  const { name, label, options, setValue, watch } = props;
+
+  const [currentValue, setCurrentValue] = useState("");
+
+  // Watch the form values changes
+  // for toggle currencies feature
+  useEffect(() => {
+    const subscription = watch((values) => {
+      const newValue = values[name] ?? null;
+
+      if (newValue) {
+        setCurrentValue(newValue);
+      }
+    });
+    return () => subscription.unsubscribe();
+  }, [name, watch]);
 
   return (
     <Autocomplete
@@ -15,6 +30,10 @@ function AutoCompleteInput(props: AutoCompleteInputProps) {
 
         return filtered;
       }}
+      onChange={(_, value) => {
+        setValue(name, value);
+      }}
+      value={currentValue}
       selectOnFocus
       clearOnBlur
       handleHomeEndKeys
@@ -25,18 +44,7 @@ function AutoCompleteInput(props: AutoCompleteInputProps) {
       sx={{ width: { xs: "100%", lg: 300 } }}
       freeSolo
       renderInput={(params) => (
-        <Controller
-          name={name}
-          control={control}
-          render={({ field }) => (
-            <TextField
-              variant="standard"
-              {...params}
-              label={label}
-              {...field}
-            />
-          )}
-        />
+        <TextField name={name} variant="standard" label={label} {...params} />
       )}
     />
   );

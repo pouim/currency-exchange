@@ -9,7 +9,13 @@ import { ExchangeProps } from "./types";
 import { useGetAllSymbols } from "hooks";
 
 function Exchange(props: ExchangeProps) {
-  const { handleConvert, control } = props;
+  const {
+    handleConvert,
+    onToggleCurrencies,
+    control,
+    setValue,
+    watch,
+  } = props;
 
   const { data } = useGetAllSymbols();
 
@@ -38,10 +44,12 @@ function Exchange(props: ExchangeProps) {
           <AutoCompleteInput
             name="from"
             label="From"
-            control={control}
             options={allSymbolsData}
+            watch={watch}
+            setValue={setValue}
           />
           <Button
+            onClick={onToggleCurrencies}
             variant="contained"
             sx={{
               background: "#fff",
@@ -57,8 +65,9 @@ function Exchange(props: ExchangeProps) {
           <AutoCompleteInput
             name="to"
             label="To"
-            control={control}
             options={allSymbolsData}
+            watch={watch}
+            setValue={setValue}
           />
         </Box>
 
