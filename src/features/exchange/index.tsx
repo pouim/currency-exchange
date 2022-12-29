@@ -1,60 +1,88 @@
-import { Controller } from "react-hook-form";
+import { useCallback } from "react";
 import { Box, Button, TextField, Typography } from "@mui/material";
 import CompareArrowsIcon from "@mui/icons-material/CompareArrows";
 
 import AutoCompleteInput from "components/ui/auto-complete-input";
 import { PRIMARY_COLOR } from "themes/constants";
 import { ConvertorWrapper } from "./styles";
-import { ExchangeProps } from "./types";
-import { useGetAllSymbols } from "hooks";
-import { isAllValuesTruthy } from "helpers/function";
+import { useGetFormData } from "./store";
+import { useUpdateFormFields } from "./store/actions";
+import {
+  useConvertCurrencyMutation,
+  useGetAllSymbolsQuery,
+} from "services/exchange";
+import ConversionResult from "./conversion-result";
 
-function Exchange(props: ExchangeProps) {
-  const {
-    handleConvert,
-    onToggleCurrencies,
-    control,
-    setValue,
-    watch,
-    conversionData,
-  } = props;
+function Convertor() {
+  const { amount, fromSymbol, toSymbol } = useGetFormData();
+  const updateFormFields = useUpdateFormFields();
 
-  const { data } = useGetAllSymbols();
+  const { data } = useGetAllSymbolsQuery();
+  const [
+    convertCurrency,
+    {
+      isLoading: isConverting,
+      isSuccess: isConversionSucceed,
+      data: conversionData,
+    },
+  ] = useConvertCurrencyMutation();
 
   const allSymbolsData = Object.keys(data?.symbols ?? []);
+
+  /**
+   * @function handleToggleCurrencies
+   * @returns { void }
+   */
+  const handleToggleCurrencies = useCallback(() => {
+    updateFormFields({
+      fromSymbol: toSymbol,
+      toSymbol: fromSymbol,
+    });
+  }, [fromSymbol, toSymbol, updateFormFields]);
+
+  /**
+   * @function handleConvertCurrency
+   * @returns { void }
+   */
+  const handleConvertCurrency = useCallback(
+    (event: any) => {
+      event.preventDefault();
+
+      convertCurrency({
+        from: fromSymbol,
+        to: toSymbol,
+        amount: amount,
+      });
+    },
+    [amount, convertCurrency, fromSymbol, toSymbol]
+  );
 
   return (
     <Box>
       <Typography variant="h1" color="text.primary">
         I want to convert
       </Typography>
-      <ConvertorWrapper onSubmit={handleConvert}>
-        <Controller
-          name="amount"
-          control={control}
-          render={({ field }) => (
-            <TextField
-              sx={{ width: { xs: "100%", lg: 350 } }}
-              variant="standard"
-              label="Amount"
-              type="number"
-              required
-              {...field}
-            />
-          )}
+      <ConvertorWrapper>
+        <TextField
+          sx={{ width: { xs: "100%", lg: 350 } }}
+          variant="standard"
+          value={amount}
+          onChange={(event) => updateFormFields({ amount: event.target.value })}
+          label="Amount"
+          type="number"
+          required
         />
 
         <Box display="flex" alignItems="flex-end" gap="2%">
           <AutoCompleteInput
-            name="from"
+            value={fromSymbol}
+            setValue={(value) => updateFormFields({ fromSymbol: value })}
             label="From"
             options={allSymbolsData}
-            watch={watch}
-            setValue={setValue}
             required
           />
           <Button
-            onClick={onToggleCurrencies}
+            onClick={handleToggleCurrencies}
             variant="contained"
             sx={{
               background: "#fff",
@@ -68,57 +96,37 @@ function Exchange(props: ExchangeProps) {
           </Button>
 
           <AutoCompleteInput
-            name="to"
+            value={toSymbol}
+            setValue={(value) => updateFormFields({ toSymbol: value })}
             label="To"
             options={allSymbolsData}
-            watch={watch}
-            setValue={setValue}
             required
           />
         </Box>
 
-        <Button sx={{ height: 35 }} variant="contained" type="submit">
+        <Button
+          sx={{ height: 35 }}
+          variant="contained"
+          onClick={handleConvertCurrency}
+          type="submit"
+        >
           Convert
         </Button>
       </ConvertorWrapper>
 
-      <Box
-        display="flex"
-        flexDirection="column"
-        alignItems="center"
-        justifyContent="center"
-        px={8}
-        pt={5}
-      >
-        {isAllValuesTruthy(conversionData) ? (
-          <>
-            <Box display="flex" mb={2}>
-              <Typography variant="h1" color="text.primary" fontWeight={300}>
-                {conversionData!.amount} {conversionData!.from} ={" "}
-              </Typography>{" "}
-              <Typography variant="h1" color="secondary">
-                {conversionData!.rate * conversionData!.amount}{" "}
-                {conversionData?.to}
-              </Typography>
-            </Box>
-
-            <Box>
-              <Typography color="text.primary">
-                1 {conversionData!.from} = {conversionData!.rate.toFixed(6)}{" "}
-                {conversionData!.to}
-              </Typography>
-              <Typography color="text.primary">
-                1 {conversionData?.to} = {(1 / conversionData!.rate).toFixed(6)}{" "}
-                {conversionData!.from}
-              </Typography>
-            </Box>
-          </>
-        ) : (
-          <Box p={8}>No Data</Box>
-        )}
-      </Box>
+      <ConversionResult
+        isLoading={isConverting}
+        isSucceed={isConversionSucceed}
+        data={{
+          fromSymbol: conversionData?.query.from ?? "",
+          toSymbol: conversionData?.query.to ?? "",
+          amount: conversionData?.query.amount ?? 0,
+          rate: conversionData?.info.rate ?? 0,
+          result: conversionData?.result ?? 0,
+        }}
+      />
     </Box>
   );
 }
 
-export default Exchange;
+export default Convertor;

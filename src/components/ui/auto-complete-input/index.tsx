@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { Autocomplete, createFilterOptions, TextField } from "@mui/material";
 
 import { AutoCompleteInputProps } from "./types";
@@ -6,22 +5,7 @@ import { AutoCompleteInputProps } from "./types";
 const filter = createFilterOptions<string>();
 
 function AutoCompleteInput(props: AutoCompleteInputProps) {
-  const { name, label, required = false, options, setValue, watch } = props;
-
-  const [currentValue, setCurrentValue] = useState("");
-
-  // Watch the form values changes
-  // for toggle currencies feature
-  useEffect(() => {
-    const subscription = watch((values) => {
-      const newValue = values[name] ?? null;
-
-      if (newValue) {
-        setCurrentValue(newValue);
-      }
-    });
-    return () => subscription.unsubscribe();
-  }, [name, watch]);
+  const { label, required = false, options, value, setValue } = props;
 
   return (
     <Autocomplete
@@ -31,9 +15,9 @@ function AutoCompleteInput(props: AutoCompleteInputProps) {
         return filtered;
       }}
       onChange={(_, value) => {
-        setValue(name, value);
+        setValue(value ?? "");
       }}
-      value={currentValue}
+      value={value}
       selectOnFocus
       clearOnBlur
       handleHomeEndKeys
@@ -45,7 +29,6 @@ function AutoCompleteInput(props: AutoCompleteInputProps) {
       freeSolo
       renderInput={(params) => (
         <TextField
-          name={name}
           variant="standard"
           label={label}
           required={required}

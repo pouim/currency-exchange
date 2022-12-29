@@ -16,9 +16,6 @@ import { AppTableProps } from "./types";
 function AppTable(props: AppTableProps) {
   const { tableData, containerHeight = 250 } = props;
 
-
-  console.log("tableData", tableData);
-
   const headers = Object.keys(tableData[0] ?? []);
 
   return (
