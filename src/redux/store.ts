@@ -1,12 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit";
 
-import currencyConvertorFormReducer from "features/exchange/store/index";
+import currencyConvertorFormReducer from "features/convert-currency/store/index";
+import statisticsReducer from "features/exchange-history/store/index";
 import { exchangeApi } from "services/exchange";
 
 export const store = configureStore({
   reducer: {
     [exchangeApi.reducerPath]: exchangeApi.reducer,
     form: currencyConvertorFormReducer,
+    statistics: statisticsReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(exchangeApi.middleware),

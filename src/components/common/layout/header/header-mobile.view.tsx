@@ -11,7 +11,7 @@ function HeaderMobileView(props: HeaderProps) {
   const { value } = props;
 
   return (
-    <Box>
+    <Box sx={{ background: "#fff" }}>
       <Box
         display="flex"
         alignItems="center"

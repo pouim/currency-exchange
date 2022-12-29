@@ -32,6 +32,7 @@ export const exchangeApi = api.injectEndpoints({
       query: ({ startDate, endDate, from, to }) => ({
         method: "GET",
         url: `timeseries?start_date=${startDate}&end_date=${endDate}&base=${from}&symbols=${to}`,
+        providesTags: [QueryKeys.HISTORICAL_RATES],
       }),
     }),
   }),

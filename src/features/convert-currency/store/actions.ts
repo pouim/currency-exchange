@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { useDispatch } from "react-redux";
 
-import { updateFormFields} from ".";
+import { updateFormFields } from ".";
 import { FormFields } from "./types";
 
 /**

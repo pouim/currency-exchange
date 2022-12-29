@@ -33,7 +33,7 @@ console.log(allValuesTruthy(obj)); // Output: true
  * @returns { boolean }
  */
 export function isAllValuesTruthy(object: Record<string, unknown> | undefined) {
-  if(typeof object == 'undefined') {
+  if (typeof object == "undefined") {
     return false;
   }
 
@@ -60,15 +60,43 @@ export function capitalize(string: string): string {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
+/**
+ * @function formatDate
+ * @param { Date } date
+ * @returns { string } in YYYY-MM-DD format
+ */
+export function formatDate(date: Date) {
+  return date.toISOString().split("T")[0];
+}
 
 /**
  * @function getLaterDate
- * @param { number } days 
+ * @param { number } days
  * @returns { string }
  */
 export function getLaterDate(days: number) {
   const today = new Date();
   const laterDate = new Date(today.getTime() + days * 24 * 60 * 60 * 1000);
 
-  return laterDate.toISOString().split("T")[0];
+  return formatDate(laterDate);
+}
+
+
+/**
+ * @function findArrayMinMaxAvg
+ * @param { Record<string, number> } object 
+ * @returns { min: number, max: number, avg: number} 
+ */
+export function findArrayMinMaxAvg(list: number[]) {
+
+  const { min, max, sum } = list.reduce(
+    (acc, value) => {
+      acc.min = Math.min(acc.min, value);
+      acc.max = Math.max(acc.max, value);
+      acc.sum += value;
+      return acc;
+    },
+    { min: Infinity, max: -Infinity, sum: 0 }
+  );
+  return { min, max, avg: sum / list.length };
 }

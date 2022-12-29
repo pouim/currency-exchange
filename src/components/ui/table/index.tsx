@@ -1,5 +1,6 @@
 import {
   Box,
+  CircularProgress,
   Paper,
   Table,
   TableBody,
@@ -9,57 +10,50 @@ import {
   TableRow,
 } from "@mui/material";
 
-import { capitalize, isEmpty } from "helpers/function";
-import { CustomTableRow } from "./styles";
+import { capitalize } from "helpers/function";
 import { AppTableProps } from "./types";
 
 function AppTable(props: AppTableProps) {
-  const { tableData, containerHeight = 250 } = props;
-
-  const headers = Object.keys(tableData[0] ?? []);
+  const {
+    headerCells,
+    isTableEmpty,
+    isEmptyMessage = "No Data!",
+    isLoading,
+    containerHeight = 250,
+    children,
+  } = props;
 
   return (
     <TableContainer component={Paper} sx={{ height: containerHeight }}>
       <Table stickyHeader aria-label="simple table">
-        {isEmpty(tableData) ? (
+        {isLoading ? (
+          <Box
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+            height={containerHeight}
+          >
+            <CircularProgress />
+          </Box>
+        ) : isTableEmpty ? (
           <Box
             display="flex"
             alignItems="center"
             justifyContent="center"
             height={250}
           >
-            No Data!
+            {isEmptyMessage}
           </Box>
         ) : (
           <>
             <TableHead>
               <TableRow>
-                {headers.map((header) => (
+                {headerCells.map((header) => (
                   <TableCell key={header}>{capitalize(header)}</TableCell>
                 ))}
               </TableRow>
             </TableHead>
-            <TableBody>
-              {tableData.map((data, index) => (
-                <CustomTableRow key={index}>
-                  {headers.map((header) => {
-                    const { hideCell = false } = data[header]?.config || {};
-                    const tableCellValue = data[header]?.value;
-
-                    return (
-                      <TableCell
-                        sx={{
-                          opacity: hideCell ? 0 : 1,
-                        }}
-                        key={header}
-                      >
-                        {tableCellValue}
-                      </TableCell>
-                    );
-                  })}
-                </CustomTableRow>
-              ))}
-            </TableBody>
+            <TableBody>{children}</TableBody>
           </>
         )}
       </Table>

@@ -11,7 +11,12 @@ function HeaderView(props: HeaderProps) {
   const { value } = props;
 
   return (
-    <Box display="flex" alignItems="flex-end" justifyContent="space-around">
+    <Box
+      display="flex"
+      alignItems="flex-end"
+      justifyContent="space-around"
+      sx={{ background: "#fff" }}
+    >
       <Box display="flex" alignItems="center" gap={1} height={50}>
         <Logo />
 

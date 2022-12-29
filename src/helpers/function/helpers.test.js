@@ -1,4 +1,11 @@
-import { isEmpty, isAllValuesTruthy, capitalize, getLaterDate } from "./index";
+import {
+  isEmpty,
+  isAllValuesTruthy,
+  capitalize,
+  formatDate,
+  getLaterDate,
+  findArrayMinMaxAvg,
+} from "./index";
 
 test("isEmpty function works correctly", () => {
   expect(isEmpty(null)).toBe(true);
@@ -37,6 +44,15 @@ test("isAllValuesTruthy", () => {
   expect(isAllValuesTruthy({ a: 0, b: "hello", c: true })).toBe(false);
 });
 
+describe("formatDate", () => {
+  it("should return a string in the format YYYY-MM-DD", () => {
+    const date = new Date("2022-12-29T12:00:00Z");
+    const formattedDate = formatDate(date);
+
+    expect(formattedDate).toBe("2022-12-29");
+  });
+});
+
 describe("getLaterDate", () => {
   beforeAll(() => {
     // Mock the Date object
@@ -66,4 +82,15 @@ describe("getLaterDate", () => {
   it("should return the correct date for 7 days later", () => {
     expect(getLaterDate(7)).toBe("2023-01-07");
   });
+});
+
+test("findArrayMinMaxAvg function", () => {
+  const list = [10, 20, 30];
+  expect(findArrayMinMaxAvg(list)).toEqual({ min: 10, max: 30, avg: 20 });
+
+  const list2 = [-10, 0, 10];
+  expect(findArrayMinMaxAvg(list2)).toEqual({ min: -10, max: 10, avg: 0 });
+
+  const list3 = [10];
+  expect(findArrayMinMaxAvg(list3)).toEqual({ min: 10, max: 10, avg: 10 });
 });
