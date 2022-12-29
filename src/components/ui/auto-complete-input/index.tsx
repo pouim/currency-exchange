@@ -6,7 +6,7 @@ import { AutoCompleteInputProps } from "./types";
 const filter = createFilterOptions<string>();
 
 function AutoCompleteInput(props: AutoCompleteInputProps) {
-  const { name, label, options, setValue, watch } = props;
+  const { name, label, required = false, options, setValue, watch } = props;
 
   const [currentValue, setCurrentValue] = useState("");
 
@@ -44,7 +44,13 @@ function AutoCompleteInput(props: AutoCompleteInputProps) {
       sx={{ width: { xs: "100%", lg: 300 } }}
       freeSolo
       renderInput={(params) => (
-        <TextField name={name} variant="standard" label={label} {...params} />
+        <TextField
+          name={name}
+          variant="standard"
+          label={label}
+          required={required}
+          {...params}
+        />
       )}
     />
   );

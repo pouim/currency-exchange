@@ -37,6 +37,8 @@ function Exchange(props: ExchangeProps) {
               sx={{ width: { xs: "100%", lg: 350 } }}
               variant="standard"
               label="Amount"
+              type="number"
+              required
               {...field}
             />
           )}
@@ -49,6 +51,7 @@ function Exchange(props: ExchangeProps) {
             options={allSymbolsData}
             watch={watch}
             setValue={setValue}
+            required
           />
           <Button
             onClick={onToggleCurrencies}
@@ -70,6 +73,7 @@ function Exchange(props: ExchangeProps) {
             options={allSymbolsData}
             watch={watch}
             setValue={setValue}
+            required
           />
         </Box>
 
@@ -100,11 +104,11 @@ function Exchange(props: ExchangeProps) {
 
             <Box>
               <Typography color="text.primary">
-                1 {conversionData!.from} = {conversionData!.rate}{" "}
+                1 {conversionData!.from} = {conversionData!.rate.toFixed(6)}{" "}
                 {conversionData!.to}
               </Typography>
               <Typography color="text.primary">
-                1 {conversionData?.to} = {1 / conversionData!.rate}{" "}
+                1 {conversionData?.to} = {(1 / conversionData!.rate).toFixed(6)}{" "}
                 {conversionData!.from}
               </Typography>
             </Box>
