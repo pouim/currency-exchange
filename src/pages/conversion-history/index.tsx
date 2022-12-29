@@ -1,24 +1,80 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
+import ViewIcon from "@mui/icons-material/RemoveRedEye";
+import DeleteIcon from "@mui/icons-material/DeleteForever";
 
 import Panel from "components/common/layout/panel";
 import AppTable from "components/ui/table";
 
+function Actions() {
+  return (
+    <Box display="flex" gap={5}>
+      <Button
+        size="small"
+        variant="text"
+        sx={{
+          fontSize: 12,
+        }}
+        startIcon={<ViewIcon />}
+      >
+        View
+      </Button>
+      <Button
+        size="small"
+        color="warning"
+        variant="text"
+        sx={{
+          fontSize: 12,
+        }}
+        startIcon={<DeleteIcon />}
+      >
+        Delete from history
+      </Button>
+    </Box>
+  );
+}
+
 const sampleData = [
   {
-    date: "2021/1/1",
-    event: "Converting an amount of 500 from EUR to USD",
+    date: {
+      value: "2021/1/1",
+    },
+    event: {
+      value: "Converting an amount of 500 from EUR to USD",
+    },
+    Actions: {
+      value: <Actions />,
+      config: {
+        hideCell: true,
+      },
+    },
   },
   {
-    date: "2021/1/2",
-    event: "Converting an amount of 500 from EUR to USD",
+    date: {
+      value: "2021/1/1",
+    },
+    event: {
+      value: "Converting an amount of 500 from EUR to USD",
+    },
+    Actions: {
+      value: <Actions />,
+      config: {
+        hideCell: true,
+      },
+    },
   },
   {
-    date: "2021/1/3",
-    event: "Converting an amount of 500 from EUR to USD",
-  },
-  {
-    date: "2021/1/1",
-    event: "Converting an amount of 500 from EUR to USD",
+    date: {
+      value: "2021/1/1",
+    },
+    event: {
+      value: "Converting an amount of 500 from EUR to USD",
+    },
+    Actions: {
+      value: <Actions />,
+      config: {
+        hideCell: true,
+      },
+    },
   },
 ];
 
