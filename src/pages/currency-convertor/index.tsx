@@ -1,11 +1,11 @@
 import { FieldValues, useForm } from "react-hook-form";
-import { Box } from "@mui/material";
 
 import Panel from "components/common/layout/panel";
 import Exchange from "features/exchange";
 import ExchangeHistory from "features/exchange-history";
 import { isEmpty } from "helpers/function";
 import { useConvertCurrency } from "hooks";
+import { Wrapper } from "./styles";
 
 function CurrencyConvertor() {
   const { control, handleSubmit, getValues, watch, setValue } = useForm();
@@ -39,7 +39,7 @@ function CurrencyConvertor() {
 
   return (
     <Panel>
-      <Box>
+      <Wrapper>
         <Exchange
           handleConvert={handleSubmit(onSubmit)}
           onToggleCurrencies={handleToggleCurrencies}
@@ -54,7 +54,7 @@ function CurrencyConvertor() {
           }}
         />
         <ExchangeHistory />
-      </Box>
+      </Wrapper>
     </Panel>
   );
 }

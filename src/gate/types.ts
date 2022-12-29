@@ -8,9 +8,23 @@ export type ConvertCurrencyResponse = {
   date: string;
 };
 
+export type GetHistoricalRatesResponse = {
+  base: string;
+  start_date: string;
+  end_date: string;
+  rates: Record<string, Record<string, number>>;
+};
+
 export type GetAllSymbolsParams = () => Promise<GetAllSymbolsResponse>;
 
 export type ConvertCurrencyParams = (
   from: string,
   to: string
 ) => Promise<ConvertCurrencyResponse>;
+
+export type GetHistoricalRatesParams = (
+  startDate: string,
+  endDate: string,
+  from: string,
+  to: string
+) => Promise<GetHistoricalRatesResponse>;

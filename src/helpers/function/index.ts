@@ -59,3 +59,16 @@ export function capitalize(string: string): string {
   // Capitalize the first letter of the text
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
+
+
+/**
+ * @function getLaterDate
+ * @param { number } days 
+ * @returns { string }
+ */
+export function getLaterDate(days: number) {
+  const today = new Date();
+  const laterDate = new Date(today.getTime() + days * 24 * 60 * 60 * 1000);
+
+  return laterDate.toISOString().split("T")[0];
+}

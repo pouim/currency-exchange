@@ -1,4 +1,4 @@
-import { isEmpty, isAllValuesTruthy, capitalize } from "./index";
+import { isEmpty, isAllValuesTruthy, capitalize, getLaterDate } from "./index";
 
 test("isEmpty function works correctly", () => {
   expect(isEmpty(null)).toBe(true);
@@ -35,4 +35,35 @@ test("isAllValuesTruthy", () => {
   expect(isAllValuesTruthy({ a: 1, b: "", c: true })).toBe(false);
   expect(isAllValuesTruthy({ a: 1, b: "hello", c: false })).toBe(false);
   expect(isAllValuesTruthy({ a: 0, b: "hello", c: true })).toBe(false);
+});
+
+describe("getLaterDate", () => {
+  beforeAll(() => {
+    // Mock the Date object
+    jest.useFakeTimers().setSystemTime(new Date("2022-12-31"));
+  });
+
+  afterAll(() => {
+    jest.resetAllMocks();
+  });
+
+  it("should return the correct date for -30 days later", () => {
+    expect(getLaterDate(-30)).toBe("2022-12-01");
+  });
+
+  it("should return the correct date for -1 days later", () => {
+    expect(getLaterDate(-1)).toBe("2022-12-30");
+  });
+
+  it("should return the correct date for 0 days later", () => {
+    expect(getLaterDate(0)).toBe("2022-12-31");
+  });
+
+  it("should return the correct date for 1 day later", () => {
+    expect(getLaterDate(1)).toBe("2023-01-01");
+  });
+
+  it("should return the correct date for 7 days later", () => {
+    expect(getLaterDate(7)).toBe("2023-01-07");
+  });
 });

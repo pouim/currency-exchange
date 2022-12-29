@@ -28,7 +28,7 @@ function Statistics() {
     },
   ];
 
-  return <AppTable tableData={sampleData} />;
+  return <AppTable containerHeight={220} tableData={sampleData} />;
 }
 
 export default Statistics;

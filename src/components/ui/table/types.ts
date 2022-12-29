@@ -9,4 +9,5 @@ export type TableCellConfiguration = {
 
 export interface AppTableProps {
   tableData: Record<string, TableCellConfiguration>[];
+  containerHeight?: number;
 }

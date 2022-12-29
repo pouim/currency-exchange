@@ -1,5 +1,7 @@
 const ALL_SYMBOLS = "ALL_SYMBOLS";
+const HISTORICAL_RATES = "HISTORICAL_RATES";
 
 export const QueryKeys = {
   ALL_SYMBOLS,
+  HISTORICAL_RATES,
 };
