@@ -81,14 +81,12 @@ export function getLaterDate(days: number) {
   return formatDate(laterDate);
 }
 
-
 /**
  * @function findArrayMinMaxAvg
- * @param { Record<string, number> } object 
- * @returns { min: number, max: number, avg: number} 
+ * @param { Record<string, number> } object
+ * @returns { min: number, max: number, avg: number}
  */
 export function findArrayMinMaxAvg(list: number[]) {
-
   const { min, max, sum } = list.reduce(
     (acc, value) => {
       acc.min = Math.min(acc.min, value);
@@ -99,4 +97,25 @@ export function findArrayMinMaxAvg(list: number[]) {
     { min: Infinity, max: -Infinity, sum: 0 }
   );
   return { min, max, avg: sum / list.length };
+}
+/**
+ * @function getUnixTimestamp
+ * @returns { number }
+ */
+export function getUnixTimestamp() {
+  return Math.floor(new Date().getTime() / 1000);
+}
+/**
+ * @function convertUnixTimestamp
+ * @param { number } timestamp
+ * @returns { string }
+ */
+export function convertUnixTimestamp(timestamp: number) {
+  const date = new Date(timestamp * 1000);
+  const day = date.getDate().toString().padStart(2, "0");
+  const month = (date.getMonth() + 1).toString().padStart(2, "0");
+  const year = date.getFullYear();
+  const hours = date.getHours().toString().padStart(2, "0");
+  const minutes = date.getMinutes().toString().padStart(2, "0");
+  return `${day}/${month}/${year} ${hours}:${minutes}`;
 }

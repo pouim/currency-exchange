@@ -5,7 +5,11 @@ import {
   formatDate,
   getLaterDate,
   findArrayMinMaxAvg,
+  getUnixTimestamp,
+  convertUnixTimestamp,
 } from "./index";
+
+const assert = require("assert");
 
 test("isEmpty function works correctly", () => {
   expect(isEmpty(null)).toBe(true);
@@ -93,4 +97,30 @@ test("findArrayMinMaxAvg function", () => {
 
   const list3 = [10];
   expect(findArrayMinMaxAvg(list3)).toEqual({ min: 10, max: 10, avg: 10 });
+});
+
+describe("getUnixTimestamp", () => {
+  it("should return a number", () => {
+    const timestamp = getUnixTimestamp();
+    assert.ok(typeof timestamp === "number");
+  });
+
+  it("should return the current Unix timestamp", () => {
+    const timestamp = getUnixTimestamp();
+    const currentTimestamp = Math.floor(new Date().getTime() / 1000);
+    assert.ok(timestamp === currentTimestamp);
+  });
+});
+
+describe("convertUnixTimestamp", () => {
+  it('should return a string in the format "DD/MM/YYYY HH:MM"', () => {
+    const dateString = convertUnixTimestamp(1612444400);
+    const regex = /^\d{2}\/\d{2}\/\d{4} \d{2}:\d{2}$/;
+    assert.ok(regex.test(dateString));
+  });
+
+  it("should correctly convert a Unix timestamp to a date string", () => {
+    const dateString = convertUnixTimestamp(1612444400);
+    assert.equal(dateString, "04/02/2021 17:13");
+  });
 });

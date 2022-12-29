@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 
 import currencyConvertorFormReducer from "features/convert-currency/store/index";
+import conversionHistoryReducer from "pages/conversion-history/store/index";
 import statisticsReducer from "features/exchange-history/store/index";
 import { exchangeApi } from "services/exchange";
 
@@ -9,6 +10,7 @@ export const store = configureStore({
     [exchangeApi.reducerPath]: exchangeApi.reducer,
     form: currencyConvertorFormReducer,
     statistics: statisticsReducer,
+    conversionHistory: conversionHistoryReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(exchangeApi.middleware),

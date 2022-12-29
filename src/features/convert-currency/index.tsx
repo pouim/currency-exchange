@@ -1,6 +1,7 @@
 import { useCallback } from "react";
 import { Box, Button, TextField, Typography } from "@mui/material";
 import CompareArrowsIcon from "@mui/icons-material/CompareArrows";
+import { v4 as uuidv4 } from "uuid";
 
 import AutoCompleteInput from "components/ui/auto-complete-input";
 import { PRIMARY_COLOR } from "themes/constants";
@@ -12,10 +13,14 @@ import {
   useGetAllSymbolsQuery,
 } from "services/exchange";
 import ConversionResult from "./conversion-result";
+import { useAddConversion } from "pages/conversion-history/store/actions";
+import { getUnixTimestamp } from "helpers/function";
 
 function Convertor() {
   const { amount, fromSymbol, toSymbol } = useGetFormData();
   const updateFormFields = useUpdateFormFields();
+
+  const addToConversionHistory = useAddConversion();
 
   const { data } = useGetAllSymbolsQuery();
   const [
@@ -52,9 +57,17 @@ function Convertor() {
         from: fromSymbol,
         to: toSymbol,
         amount: amount,
+      }).then(() => {
+        addToConversionHistory({
+          fromSymbol,
+          toSymbol,
+          amount,
+          timestamp: getUnixTimestamp(),
+          key: uuidv4(),
+        });
       });
     },
-    [amount, convertCurrency, fromSymbol, toSymbol]
+    [addToConversionHistory, amount, convertCurrency, fromSymbol, toSymbol]
   );
 
   return (
