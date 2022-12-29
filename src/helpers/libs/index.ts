@@ -15,7 +15,7 @@ export const showMessage = (message: string, type: MessageType): void => {
     newWindow: true,
     close: true,
     gravity: "bottom",
-    position: "center",
+    position: "left",
     backgroundColor: type === "SUCCESS" ? PRIMARY_COLOR : WARNING_COLOR,
     stopOnFocus: true, // Prevents dismissing of toast on hover
   }).showToast();

@@ -18,7 +18,7 @@ export const conversionHistorySlice = createSlice({
     ) => {
       const { newData } = action.payload;
 
-      state.data.push(newData);
+      state.data.unshift(newData);
     },
 
     deleteConversionData: (

@@ -1,4 +1,19 @@
 /**
+ * @function getQueryParams
+ * @returns { Record<string, unknown> }
+ */
+export function getQueryParams() {
+  const searchParams = new URLSearchParams(window.location.search);
+  return Array.from(searchParams.entries()).reduce(
+    (params: Record<string, unknown>, [key, value]) => {
+      params[key] = value;
+      return params;
+    },
+    {}
+  );
+}
+
+/**
  * @description To check if a value is empty.
  * @function isEmpty
  * @param { any } value // Generic type

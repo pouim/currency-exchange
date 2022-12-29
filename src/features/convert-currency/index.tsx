@@ -14,9 +14,19 @@ import {
 } from "services/exchange";
 import ConversionResult from "./conversion-result";
 import { useAddConversion } from "pages/conversion-history/store/actions";
-import { getUnixTimestamp } from "helpers/function";
+import {
+  getQueryParams,
+  getUnixTimestamp,
+  isAllValuesTruthy,
+  isEmpty,
+} from "helpers/function";
+import { useIfObjectChanged } from "helpers/hooks";
+import { ConversionType } from "pages/conversion-history/store/types";
+import { showMessage } from "helpers/libs";
 
 function Convertor() {
+  const params = getQueryParams();
+
   const { amount, fromSymbol, toSymbol } = useGetFormData();
   const updateFormFields = useUpdateFormFields();
 
@@ -50,8 +60,14 @@ function Convertor() {
    * @returns { void }
    */
   const handleConvertCurrency = useCallback(
-    (event: any) => {
-      event.preventDefault();
+    (
+      data: Pick<ConversionType, "amount" | "fromSymbol" | "toSymbol">,
+      event?: React.MouseEvent<HTMLElement>,
+      shouldClearField = true
+    ) => {
+      event?.preventDefault();
+
+      const { fromSymbol, toSymbol, amount } = data;
 
       convertCurrency({
         from: fromSymbol,
@@ -65,10 +81,50 @@ function Convertor() {
           timestamp: getUnixTimestamp(),
           key: uuidv4(),
         });
+
+        showMessage(
+          `Converted an amount of ${amount} from ${fromSymbol} to ${toSymbol}`,
+          "SUCCESS"
+        );
+
+        // clear fields
+        shouldClearField &&
+          updateFormFields({
+            amount: "",
+            fromSymbol: "",
+            toSymbol: "",
+          });
       });
     },
-    [addToConversionHistory, amount, convertCurrency, fromSymbol, toSymbol]
+    [
+      addToConversionHistory,
+      amount,
+      convertCurrency,
+      fromSymbol,
+      toSymbol,
+      updateFormFields,
+    ]
   );
+
+  useIfObjectChanged(params as any, () => {
+    if (!isEmpty(params)) {
+      const { amount, fromSymbol, toSymbol } = params as ConversionType;
+
+      updateFormFields({
+        amount,
+        fromSymbol,
+        toSymbol,
+      });
+
+      setTimeout(() => {
+        handleConvertCurrency(
+          { amount, fromSymbol, toSymbol },
+          undefined,
+          false
+        );
+      }, 400);
+    }
+  });
 
   return (
     <Box>
@@ -120,8 +176,11 @@ function Convertor() {
         <Button
           sx={{ height: 35 }}
           variant="contained"
-          onClick={handleConvertCurrency}
+          onClick={(event) =>
+            handleConvertCurrency({ amount, fromSymbol, toSymbol }, event)
+          }
           type="submit"
+          disabled={!isAllValuesTruthy({ amount, fromSymbol, toSymbol })}
         >
           Convert
         </Button>
