@@ -1,6 +1,6 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 
-import { getAllSymbols } from "gate";
+import { convertCurrency, getAllSymbols } from "gate";
 import { QueryKeys } from "./constants";
 
 export const useGetAllSymbols = () => {
@@ -12,3 +12,10 @@ export const useGetAllSymbols = () => {
     staleTime: 1000 * 60 * 60 * 24,
   });
 };
+
+export const useConvertCurrency = () => {
+  return useMutation({
+    mutationFn: ({ from, to }: { from: string; to: string }) =>
+      convertCurrency(from, to),
+  });
+}

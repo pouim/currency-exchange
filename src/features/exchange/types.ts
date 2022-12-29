@@ -11,4 +11,10 @@ export interface ExchangeProps {
   control: Control<FieldValues, any>;
   setValue: UseFormSetValue<FieldValues>;
   watch: UseFormWatch<FieldValues>;
+  conversionData?: {
+    from: string;
+    to: string;
+    amount: number;
+    rate: number;
+  };
 }

@@ -1,7 +1,6 @@
-import { Box, ThemeOptions } from "@mui/material";
 import { styled } from "@mui/system";
 
-export const ConvertorWrapper = styled("form")((theme: ThemeOptions) => ({
+export const ConvertorWrapper = styled("form")(() => ({
   width: "100%",
   display: "flex",
   flexDirection: "column",

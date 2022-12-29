@@ -21,10 +21,35 @@ export function isEmpty(value: any): boolean {
 }
 
 /**
+ * @description to check all values of an object are truthy.
+ * const obj = {
+  a: 1,
+  b: 'hello',
+  c: true
+};
+console.log(allValuesTruthy(obj)); // Output: true
+ * @function isAllValuesTruthy
+ * @param { Record<string, unknown> | undefined } object 
+ * @returns { boolean }
+ */
+export function isAllValuesTruthy(object: Record<string, unknown> | undefined) {
+  if(typeof object == 'undefined') {
+    return false;
+  }
+
+  for (const value of Object.values(object)) {
+    if (!value) {
+      return false;
+    }
+  }
+  return true;
+}
+
+/**
  * @description to capitalize first letter of given string
- * and replace '_' with space. 
+ * and replace '_' with space.
  * @function capitalize
- * @param { string } string 
+ * @param { string } string
  * @returns { string }
  */
 export function capitalize(string: string): string {

@@ -5,11 +5,22 @@ import Panel from "components/common/layout/panel";
 import Exchange from "features/exchange";
 import ExchangeHistory from "features/exchange-history";
 import { isEmpty } from "helpers/function";
+import { useConvertCurrency } from "hooks";
 
 function CurrencyConvertor() {
   const { control, handleSubmit, getValues, watch, setValue } = useForm();
+  const formValues = getValues();
 
-  const onSubmit = (data: FieldValues) => console.log("data", data);
+  const { mutate: onConvertCurrency, data: conversionData } =
+    useConvertCurrency();
+
+  const onSubmit = (data: FieldValues) => {
+    const { from, to } = data;
+
+    if (!isEmpty(from) && !isEmpty(to)) {
+      onConvertCurrency({ from, to });
+    }
+  };
 
   /**
    * @function handleToggleCurrencies
@@ -35,6 +46,12 @@ function CurrencyConvertor() {
           control={control}
           watch={watch}
           setValue={setValue}
+          conversionData={{
+            from: conversionData?.query.from ?? "",
+            to: conversionData?.query.to ?? "",
+            rate: conversionData?.result ?? 0,
+            amount: formValues["amount"],
+          }}
         />
         <ExchangeHistory />
       </Box>

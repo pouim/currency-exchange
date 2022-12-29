@@ -7,6 +7,7 @@ import { PRIMARY_COLOR } from "themes/constants";
 import { ConvertorWrapper } from "./styles";
 import { ExchangeProps } from "./types";
 import { useGetAllSymbols } from "hooks";
+import { isAllValuesTruthy } from "helpers/function";
 
 function Exchange(props: ExchangeProps) {
   const {
@@ -15,6 +16,7 @@ function Exchange(props: ExchangeProps) {
     control,
     setValue,
     watch,
+    conversionData,
   } = props;
 
   const { data } = useGetAllSymbols();
@@ -84,19 +86,32 @@ function Exchange(props: ExchangeProps) {
         px={8}
         pt={5}
       >
-        <Box display="flex" mb={2}>
-          <Typography variant="h1" color="text.primary" fontWeight={300}>
-            500 EUR ={" "}
-          </Typography>{" "}
-          <Typography variant="h1" color="secondary">
-            576,168 USD
-          </Typography>
-        </Box>
+        {isAllValuesTruthy(conversionData) ? (
+          <>
+            <Box display="flex" mb={2}>
+              <Typography variant="h1" color="text.primary" fontWeight={300}>
+                {conversionData!.amount} {conversionData!.from} ={" "}
+              </Typography>{" "}
+              <Typography variant="h1" color="secondary">
+                {conversionData!.rate * conversionData!.amount}{" "}
+                {conversionData?.to}
+              </Typography>
+            </Box>
 
-        <Box>
-          <Typography color="text.primary">1 EUR = 1,1532445 USD</Typography>
-          <Typography color="text.primary">1 USD = 0,8754326 EUR</Typography>
-        </Box>
+            <Box>
+              <Typography color="text.primary">
+                1 {conversionData!.from} = {conversionData!.rate}{" "}
+                {conversionData!.to}
+              </Typography>
+              <Typography color="text.primary">
+                1 {conversionData?.to} = {1 / conversionData!.rate}{" "}
+                {conversionData!.from}
+              </Typography>
+            </Box>
+          </>
+        ) : (
+          <Box p={8}>No Data</Box>
+        )}
       </Box>
     </Box>
   );
