@@ -96,14 +96,7 @@ function Convertor() {
           });
       });
     },
-    [
-      addToConversionHistory,
-      amount,
-      convertCurrency,
-      fromSymbol,
-      toSymbol,
-      updateFormFields,
-    ]
+    [addToConversionHistory, convertCurrency, updateFormFields]
   );
 
   useIfObjectChanged(params as any, () => {

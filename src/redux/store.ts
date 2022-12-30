@@ -16,13 +16,11 @@ const rootReducer = combineReducers({
   [exchangeApi.reducerPath]: exchangeApi.reducer,
   form: currencyConvertorFormReducer,
   statistics: statisticsReducer,
-  conversionHistory: conversionHistoryReducer,
+  conversionHistory: persistReducer(persistConfig, conversionHistoryReducer),
 });
 
-const persistedReducer = persistReducer(persistConfig, rootReducer);
-
 export const store = configureStore({
-  reducer: persistedReducer,
+  reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(exchangeApi.middleware),
   devTools: process.env.NODE_ENV !== "production",
