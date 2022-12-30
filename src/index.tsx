@@ -15,6 +15,8 @@ import { theme } from "./themes";
 import App from "App";
 import { persistor, store } from "redux/store";
 
+import * as setupServiceWorker from "./setupServiceWorker";
+
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
@@ -30,3 +32,5 @@ root.render(
     </ThemeProvider>
   </React.StrictMode>
 );
+
+setupServiceWorker.register();
