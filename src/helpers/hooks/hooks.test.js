@@ -1,4 +1,5 @@
 import { renderHook } from "@testing-library/react";
+
 import { useIsDesktop } from "./index";
 
 describe("useIsDesktop", () => {

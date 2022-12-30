@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 
 import { capitalize } from "helpers/function";
+import { SECONDARY_TEXT_COLOR } from "themes/constants";
 import { AppTableProps } from "./types";
 
 function AppTable(props: AppTableProps) {
@@ -25,7 +26,10 @@ function AppTable(props: AppTableProps) {
   } = props;
 
   return (
-    <TableContainer component={Paper} sx={{ height: containerHeight, ...style }}>
+    <TableContainer
+      component={Paper}
+      sx={{ height: containerHeight, ...style }}
+    >
       <Table stickyHeader aria-label="simple table">
         {isLoading ? (
           <Box
@@ -50,7 +54,9 @@ function AppTable(props: AppTableProps) {
             <TableHead>
               <TableRow>
                 {headerCells.map((header) => (
-                  <TableCell key={header}>{capitalize(header)}</TableCell>
+                  <TableCell sx={{color: SECONDARY_TEXT_COLOR}} key={header}>
+                    {capitalize(header)}
+                  </TableCell>
                 ))}
               </TableRow>
             </TableHead>

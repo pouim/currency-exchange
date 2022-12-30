@@ -86,6 +86,7 @@ function Convertor() {
           "SUCCESS"
         );
 
+        // clear amount field
         updateFormFields({
           amount: "",
         });
@@ -94,7 +95,7 @@ function Convertor() {
     [addToConversionHistory, convertCurrency, updateFormFields]
   );
 
-  useIfObjectChanged(params as any, () => {
+  useIfObjectChanged(params as Record<string, unknown>, () => {
     if (!isEmpty(params)) {
       const { amount, fromSymbol, toSymbol } = params as ConversionType;
 
