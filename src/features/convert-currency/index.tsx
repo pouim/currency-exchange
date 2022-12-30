@@ -19,6 +19,7 @@ import {
   getUnixTimestamp,
   isAllValuesTruthy,
   isEmpty,
+  isOffline,
 } from "helpers/function";
 import { useIfObjectChanged } from "helpers/hooks";
 import { ConversionType } from "pages/conversion-history/store/types";
@@ -68,29 +69,35 @@ function Convertor() {
 
       const { fromSymbol, toSymbol, amount } = data;
 
-      convertCurrency({
-        from: fromSymbol,
-        to: toSymbol,
-        amount: amount,
-      }).then(() => {
-        addToConversionHistory({
-          fromSymbol,
-          toSymbol,
-          amount,
-          timestamp: getUnixTimestamp(),
-          key: uuidv4(),
-        });
+      const isUserOffline = isOffline();
 
-        showMessage(
-          `Converted an amount of ${amount} from ${fromSymbol} to ${toSymbol}`,
-          "SUCCESS"
-        );
+      if (isUserOffline) {
+        showMessage("You are offline!", "ERROR");
+      } else {
+        convertCurrency({
+          from: fromSymbol,
+          to: toSymbol,
+          amount: amount,
+        }).then(() => {
+          addToConversionHistory({
+            fromSymbol,
+            toSymbol,
+            amount,
+            timestamp: getUnixTimestamp(),
+            key: uuidv4(),
+          });
 
-        // clear amount field
-        updateFormFields({
-          amount: "",
+          showMessage(
+            `Converted an amount of ${amount} from ${fromSymbol} to ${toSymbol}`,
+            "SUCCESS"
+          );
+
+          // clear amount field
+          updateFormFields({
+            amount: "",
+          });
         });
-      });
+      }
     },
     [addToConversionHistory, convertCurrency, updateFormFields]
   );

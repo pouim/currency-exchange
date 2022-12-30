@@ -9,10 +9,10 @@ const isLocalhost = Boolean(
 );
 
 export function register() {
-  //   if (isLocalhost) {
-  //     console.log("service worker disabled because running on localhost");
-  //     return;
-  //   }
+  if (isLocalhost) {
+    console.log("service worker disabled because running on localhost");
+    return;
+  }
 
   if ("serviceWorker" in navigator) {
     window.addEventListener("load", function () {
