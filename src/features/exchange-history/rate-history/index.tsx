@@ -1,3 +1,4 @@
+import { useMemo, useState } from "react";
 import {
   Box,
   FormControl,
@@ -22,13 +23,41 @@ import { useGetHistoricalRatesMutation } from "services/exchange";
 import { GetHistoricalRatesResponse } from "services/types";
 import { useUpdateStatistics } from "../store/actions";
 import HistoryTable from "./history-table";
+import { HistoryData, ViewMode } from "./types";
+import HistoryChart from "./history-chart";
 
 function RateHistory() {
+  const [viewMode, setViewMode] = useState<ViewMode>("table");
+
   const { duration, fromSymbol, toSymbol } = useGetFormData();
   const updateFormFields = useUpdateFormFields();
   const updateStatistics = useUpdateStatistics();
   const [getHistoricalRates, { isLoading, data }] =
     useGetHistoricalRatesMutation();
+
+  const historyData = useMemo(() => {
+    if (data?.rates) {
+      const formattedDate = Object.keys(data.rates).map((date) => {
+        const value = data.rates[date];
+
+        return {
+          date,
+          rate: Object.values(value)[0],
+        } as HistoryData;
+      });
+
+      return formattedDate;
+    }
+
+    return [];
+  }, [data?.rates]);
+
+  const handleChangeViewMode = (
+    event: React.ChangeEvent<HTMLInputElement>,
+    value: string
+  ) => {
+    setViewMode(value as ViewMode);
+  };
 
   useIfObjectChanged({ duration, fromSymbol, toSymbol }, () => {
     getHistoricalRates({
@@ -80,7 +109,8 @@ function RateHistory() {
           <RadioGroup
             row
             aria-labelledby="mode"
-            defaultValue="table"
+            value={viewMode}
+            onChange={handleChangeViewMode}
             name="mode"
           >
             <FormControlLabel value="table" control={<Radio />} label="table" />
@@ -89,7 +119,13 @@ function RateHistory() {
         </FormControl>
       </Box>
 
-      <HistoryTable data={data} isLoading={isLoading} />
+      <HistoryTable
+        tableData={historyData}
+        isLoading={isLoading}
+        shouldHide={viewMode === "chart"}
+      />
+
+      <HistoryChart chartData={historyData} shouldHide={viewMode === "table"} />
     </Box>
   );
 }

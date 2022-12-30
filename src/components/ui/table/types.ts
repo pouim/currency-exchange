@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { CSSProperties, ReactNode } from "react";
 
 export interface AppTableProps {
   headerCells: string[];
@@ -6,5 +6,6 @@ export interface AppTableProps {
   isTableEmpty?: boolean;
   isEmptyMessage?: string | ReactNode;
   children?: ReactNode;
+  style?: CSSProperties;
   containerHeight?: number;
 }

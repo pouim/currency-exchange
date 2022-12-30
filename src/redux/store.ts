@@ -14,7 +14,7 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
   [exchangeApi.reducerPath]: exchangeApi.reducer,
-  form: currencyConvertorFormReducer,
+  form: persistReducer(persistConfig, currencyConvertorFormReducer),
   statistics: statisticsReducer,
   conversionHistory: persistReducer(persistConfig, conversionHistoryReducer),
 });

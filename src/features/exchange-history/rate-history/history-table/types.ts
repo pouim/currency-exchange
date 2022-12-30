@@ -1,11 +1,7 @@
-import { GetHistoricalRatesResponse } from "services/types";
+import { HistoryData } from "../types";
 
 export interface HistoryTableProps {
-  data?: GetHistoricalRatesResponse;
+  tableData: HistoryData[];
   isLoading: boolean;
+  shouldHide?: boolean;
 }
-
-export type HistoryTableData = {
-  date: string;
-  rate: number;
-};

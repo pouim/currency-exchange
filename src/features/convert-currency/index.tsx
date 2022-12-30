@@ -62,8 +62,7 @@ function Convertor() {
   const handleConvertCurrency = useCallback(
     (
       data: Pick<ConversionType, "amount" | "fromSymbol" | "toSymbol">,
-      event?: React.MouseEvent<HTMLElement>,
-      shouldClearField = true
+      event?: React.MouseEvent<HTMLElement>
     ) => {
       event?.preventDefault();
 
@@ -87,13 +86,9 @@ function Convertor() {
           "SUCCESS"
         );
 
-        // clear fields
-        shouldClearField &&
-          updateFormFields({
-            amount: "",
-            fromSymbol: "",
-            toSymbol: "",
-          });
+        updateFormFields({
+          amount: "",
+        });
       });
     },
     [addToConversionHistory, convertCurrency, updateFormFields]
@@ -110,11 +105,7 @@ function Convertor() {
       });
 
       setTimeout(() => {
-        handleConvertCurrency(
-          { amount, fromSymbol, toSymbol },
-          undefined,
-          false
-        );
+        handleConvertCurrency({ amount, fromSymbol, toSymbol }, undefined);
       }, 400);
     }
   });

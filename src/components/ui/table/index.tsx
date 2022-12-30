@@ -20,11 +20,12 @@ function AppTable(props: AppTableProps) {
     isEmptyMessage = "No Data!",
     isLoading,
     containerHeight = 250,
+    style,
     children,
   } = props;
 
   return (
-    <TableContainer component={Paper} sx={{ height: containerHeight }}>
+    <TableContainer component={Paper} sx={{ height: containerHeight, ...style }}>
       <Table stickyHeader aria-label="simple table">
         {isLoading ? (
           <Box
