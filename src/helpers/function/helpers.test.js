@@ -7,6 +7,7 @@ import {
   findArrayMinMaxAvg,
   getUnixTimestamp,
   convertUnixTimestamp,
+  isOffline,
 } from "./index";
 
 const assert = require("assert");
@@ -122,5 +123,23 @@ describe("convertUnixTimestamp", () => {
   it("should correctly convert a Unix timestamp to a date string", () => {
     const dateString = convertUnixTimestamp(1612444400);
     assert.equal(dateString, "04/02/2021 17:13");
+  });
+});
+
+describe("isOffline", () => {
+  it("returns true if the device is offline", () => {
+    Object.defineProperty(navigator, "onLine", {
+      get: () => false,
+      configurable: true,
+    });
+    expect(isOffline()).toBe(true);
+  });
+
+  it("returns false if the device is online", () => {
+    Object.defineProperty(navigator, "onLine", {
+      get: () => true,
+      configurable: true,
+    });
+    expect(isOffline()).toBe(false);
   });
 });

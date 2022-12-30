@@ -134,3 +134,12 @@ export function convertUnixTimestamp(timestamp: number) {
   const minutes = date.getMinutes().toString().padStart(2, "0");
   return `${day}/${month}/${year} ${hours}:${minutes}`;
 }
+
+/**
+ * @description to detect if the device is offline
+ * @function isOffline
+ * @returns { boolean }
+ */
+export function isOffline() {
+  return !navigator.onLine;
+}
