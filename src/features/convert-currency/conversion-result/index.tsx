@@ -38,7 +38,10 @@ function ConversionResult(props: ConversionResultProps) {
           </Box>
         </>
       ) : isLoading ? (
-        <CircularProgress />
+        <Box p={5}>
+          {" "}
+          <CircularProgress size={30} />
+        </Box>
       ) : (
         <Box p={8}>No Data</Box>
       )}
