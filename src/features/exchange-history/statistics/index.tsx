@@ -14,7 +14,7 @@ function Statistics() {
   return (
     <AppTable
       isTableEmpty={!isAllValuesTruthy(statisticsData)}
-      containerHeight={250}
+      containerHeight={211}
       headerCells={headerCell}
       dataTest="statistics"
     >

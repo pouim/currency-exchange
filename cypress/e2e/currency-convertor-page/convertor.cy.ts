@@ -15,7 +15,7 @@ describe("test convertor section", () => {
     cy.get('[data-test="convert-button"]').should("have.length", 1);
     cy.get('[data-test="conversion-result-wrapper"]')
       .should("have.length", 1)
-      .contains("No Data");
+      .contains("Select Currencies to see conversion result");
   });
 
   it("should convert amount of 3500 from usd to eur and show the result", () => {

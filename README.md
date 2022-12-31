@@ -12,6 +12,7 @@ https://currency-exchange-iota.vercel.app/currency-convertor
 ## Features
 
 - Responsive
+- Dark mode support
 - Data persisted
 - Offline mode support
 - Auto suggest valid currency symbols
