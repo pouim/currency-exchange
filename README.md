@@ -9,6 +9,15 @@ A simple project to convert a specific amount of one currency to another and obt
 https://currency-exchange-iota.vercel.app/currency-convertor
 
 
+## Features
+
+- Responsive
+- Data persisted
+- Offline mode support
+- Auto suggest valid currency symbols
+- Historical rate chart
+
+
 ## Run Locally
 
 Clone the project
@@ -42,6 +51,7 @@ To run tests, run the following command
 
 ```bash
   npm run test
+  npm run test:e2e
 ```
 
 
