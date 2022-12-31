@@ -10,17 +10,20 @@ import { exchangeApi } from "services/exchange";
 const persistConfig = {
   key: "root",
   storage,
+  blacklist: ["statistics"],
 };
 
 const rootReducer = combineReducers({
   [exchangeApi.reducerPath]: exchangeApi.reducer,
-  form: persistReducer(persistConfig, currencyConvertorFormReducer),
+  form: currencyConvertorFormReducer,
   statistics: statisticsReducer,
-  conversionHistory: persistReducer(persistConfig, conversionHistoryReducer),
+  conversionHistory: conversionHistoryReducer,
 });
 
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+
 export const store = configureStore({
-  reducer: rootReducer,
+  reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(exchangeApi.middleware),
   devTools: process.env.NODE_ENV !== "production",
