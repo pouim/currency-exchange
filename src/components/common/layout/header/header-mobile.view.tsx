@@ -1,17 +1,19 @@
-import { Box, Button, Divider, Tabs } from "@mui/material";
 import { memo } from "react";
+import { Box, Divider, Tabs } from "@mui/material";
 
+import ToggleDarkMode from "components/ui/toggle-dark-mode";
 import { tabsData } from "../constants";
 import LinkTab from "../link-tab";
 import Logo from "../logo";
 import { a11yProps } from "./controller";
 import { HeaderProps } from "./types";
+import { HeaderWrapper } from "./styles";
 
 function HeaderMobileView(props: HeaderProps) {
   const { value } = props;
 
   return (
-    <Box sx={{ background: "#fff" }}>
+    <HeaderWrapper>
       <Box
         display="flex"
         alignItems="center"
@@ -20,7 +22,7 @@ function HeaderMobileView(props: HeaderProps) {
         mb={2}
       >
         <Logo />
-        <Button>Logout</Button>
+        <ToggleDarkMode />
       </Box>
 
       <Divider />
@@ -42,7 +44,7 @@ function HeaderMobileView(props: HeaderProps) {
           );
         })}
       </Tabs>
-    </Box>
+    </HeaderWrapper>
   );
 }
 

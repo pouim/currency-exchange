@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
+import { useSelector } from "react-redux";
 
 import { initialFormState } from "./constants";
 import { FormFields } from "./types";
-import { useSelector } from "react-redux";
 import { RootState } from "redux/store";
 
 export const currencyConvertorFormSlice = createSlice({

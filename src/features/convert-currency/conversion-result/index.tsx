@@ -14,29 +14,35 @@ function ConversionResult(props: ConversionResultProps) {
       flexDirection="column"
       alignItems="center"
       justifyContent="center"
-      px={8}
       pt={5}
       data-test="conversion-result-wrapper"
     >
       {isSucceed && isAllValuesTruthy(data) ? (
         <>
           <Box display="flex" mb={2} data-test="conversion-result-info">
-            <Typography variant="h1" color="text.primary" fontWeight={300}>
+            <Typography
+              noWrap
+              variant="h1"
+              color="text.primary"
+              fontWeight={300}
+            >
               {amount} {fromSymbol} =&nbsp;
             </Typography>
-            <Typography variant="h1" color="secondary">
+            <Typography noWrap variant="h1" color="secondary">
               {result} {toSymbol}
             </Typography>
           </Box>
 
           <Box data-test="conversion-rate-info">
             <Typography
+              variant="h3"
               color="text.primary"
               data-test="conversion-rate-from-info"
             >
               1 {fromSymbol} = {rate} {toSymbol}
             </Typography>
             <Typography
+              variant="h3"
               color="text.primary"
               data-test="conversion-rate-to-info"
             >
@@ -51,7 +57,9 @@ function ConversionResult(props: ConversionResultProps) {
         </Box>
       ) : (
         <Box data-test="conversion-result-no-data" p={8}>
-          No Data
+          <Typography variant="h3" sx={{ textAlign: "center" }}>
+            Select Currencies to see conversion result
+          </Typography>
         </Box>
       )}
     </Box>

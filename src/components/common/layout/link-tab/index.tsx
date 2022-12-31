@@ -13,6 +13,7 @@ function LinkTab(props: LinkTabProps) {
       to={pathName}
       label={label}
       data-test={`${pathName}-tab`}
+      sx={{ fontSize: { xs: 10, md: 14 } }}
     />
   );
 }

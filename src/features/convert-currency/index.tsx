@@ -119,7 +119,7 @@ function Convertor() {
   });
 
   return (
-    <Box>
+    <Box px={{ xs: 1 }}>
       <Typography
         variant="h1"
         color="text.primary"
@@ -148,19 +148,18 @@ function Convertor() {
             required
             dataTest="from-field"
           />
+
           <Button
             onClick={handleToggleCurrencies}
             variant="contained"
             sx={{
-              background: "#fff",
-              color: PRIMARY_COLOR,
-              minWidth: 10,
-              padding: "5px 8px",
+              minWidth: 5,
+              padding: "1px 6px",
             }}
             data-test="toggle-currencies-button"
           >
             {" "}
-            <CompareArrowsIcon />
+            <CompareArrowsIcon fontSize="small" />
           </Button>
 
           <AutoCompleteInput

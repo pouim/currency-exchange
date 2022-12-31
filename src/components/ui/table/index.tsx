@@ -4,14 +4,14 @@ import {
   Paper,
   Table,
   TableBody,
-  TableCell,
   TableContainer,
   TableHead,
   TableRow,
+  Typography,
 } from "@mui/material";
 
 import { capitalize } from "helpers/function";
-import { SECONDARY_TEXT_COLOR } from "themes/constants";
+import { CustomTableCell } from "./styles";
 import { AppTableProps } from "./types";
 
 function AppTable(props: AppTableProps) {
@@ -23,7 +23,7 @@ function AppTable(props: AppTableProps) {
     containerHeight = 250,
     style,
     children,
-    dataTest
+    dataTest,
   } = props;
 
   return (
@@ -47,19 +47,21 @@ function AppTable(props: AppTableProps) {
             display="flex"
             alignItems="center"
             justifyContent="center"
-            height={250}
+            height={containerHeight}
             data-test={`${dataTest}-table-empty-state`}
           >
-            {isEmptyMessage}
+            <Typography variant="h3">{isEmptyMessage}</Typography>
           </Box>
         ) : (
           <>
             <TableHead>
               <TableRow>
                 {headerCells.map((header) => (
-                  <TableCell sx={{ color: SECONDARY_TEXT_COLOR }} key={header}>
-                    {capitalize(header)}
-                  </TableCell>
+                  <CustomTableCell key={header}>
+                    <Typography color="text.secondary" variant="h3">
+                      {capitalize(header)}
+                    </Typography>
+                  </CustomTableCell>
                 ))}
               </TableRow>
             </TableHead>

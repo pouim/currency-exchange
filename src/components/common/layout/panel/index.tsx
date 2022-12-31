@@ -1,19 +1,11 @@
-import { Box } from "@mui/material";
-import { grey } from "@mui/material/colors";
-
+import { PanelWrapper } from "./styles";
 import { PanelProps } from "./types";
 
 function Panel({ children }: PanelProps) {
   return (
-    <Box
-      display="flex"
-      justifyContent="center"
-      py={5}
-      px={{ s: 1, md: 0 }}
-      sx={{ background: grey[300], minHeight: "100vh" }}
-    >
+    <PanelWrapper py={5} px={{ s: 1, md: 0 }}>
       {children}
-    </Box>
+    </PanelWrapper>
   );
 }
 

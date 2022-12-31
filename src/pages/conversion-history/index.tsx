@@ -13,18 +13,19 @@ function ConversionHistory() {
 
   return (
     <Panel>
-      <Box width={{ xs: "90%", lg: "70%", height: "100vh" }}>
+      <Box width={{ xs: "100%", lg: "80%" }}>
         <Typography
           variant="h1"
           color="text.primary"
           mb={2}
+          ml={{ xs: 1 }}
           data-test="conversion-history-title"
         >
           Conversion History
         </Typography>
 
         <AppTable
-          containerHeight={400}
+          containerHeight={700}
           isTableEmpty={isEmpty(data)}
           headerCells={headerCells}
           dataTest="conversion-history"
@@ -35,7 +36,7 @@ function ConversionHistory() {
               <CustomTableRow data-test="conversion-history-table-row">
                 <TableCell>{convertUnixTimestamp(timestamp)}</TableCell>
                 <TableCell>{`Converted an amount of ${amount} from ${fromSymbol} to ${toSymbol}`}</TableCell>
-                <TableCell sx={{ opacity: 0 }}>
+                <TableCell>
                   <TableAction data={conversion} />
                 </TableCell>
               </CustomTableRow>

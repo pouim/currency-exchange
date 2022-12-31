@@ -1,15 +1,17 @@
-import { TableRow } from "@mui/material";
-import { grey } from "@mui/material/colors";
+import { TableCell, TableRow } from "@mui/material";
 import { styled } from "@mui/system";
 
-export const CustomTableRow = styled(TableRow)(() => ({
-  
+export const CustomTableRow = styled(TableRow)(({ theme }) => ({
   "&:hover": {
-    backgroundColor: grey[200],
+    backgroundColor: theme.palette.customColor.tableHoverColor,
 
-    "& td": {
+    "& div": {
       transition: "0.3s",
       opacity: 1,
     },
   },
+}));
+
+export const CustomTableCell = styled(TableCell)(({ theme }) => ({
+  backgroundColor: theme.palette.customColor.tableHeaderColor,
 }));

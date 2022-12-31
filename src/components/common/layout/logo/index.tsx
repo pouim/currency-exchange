@@ -6,7 +6,7 @@ function Logo() {
   return (
     <Box display="flex" alignItems="center" justifyContent="center" gap={1}>
       <CurrencyExchangeIcon color="primary" />
-      <Typography>
+      <Typography variant="h3">
         Currency<strong>Exchange</strong>
       </Typography>
     </Box>

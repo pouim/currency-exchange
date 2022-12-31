@@ -8,6 +8,7 @@ import {
   Radio,
   RadioGroup,
   Select,
+  Typography,
 } from "@mui/material";
 
 import { useGetFormData } from "features/convert-currency/store";
@@ -124,13 +125,13 @@ function RateHistory() {
               data-test="table-mode-radio-button"
               value="table"
               control={<Radio />}
-              label="table"
+              label={<Typography variant="h3">Table</Typography>}
             />
             <FormControlLabel
               data-test="chart-mode-radio-button"
               value="chart"
               control={<Radio />}
-              label="chart"
+              label={<Typography variant="h3">Chart</Typography>}
             />
           </RadioGroup>
         </FormControl>

@@ -1,38 +1,57 @@
 import { memo } from "react";
-import { Box } from "@mui/material";
-import { LineChart, Line, XAxis, Tooltip, ResponsiveContainer } from "recharts";
+import { Box, Typography } from "@mui/material";
+import {
+  AreaChart,
+  Area,
+  XAxis,
+  Tooltip,
+  ResponsiveContainer,
+  CartesianGrid,
+  YAxis,
+} from "recharts";
 
-import { PRIMARY_COLOR } from "themes/constants";
+import { PRIMARY_COLOR, SECONDARY_COLOR } from "themes/constants";
 import { HistoryChartProps } from "./types";
 import { isEmpty } from "helpers/function";
+import { ChartWrapper } from "./styles";
+
 
 function HistoryChart(props: HistoryChartProps) {
   const { chartData, shouldHide = false } = props;
 
   return (
-    <Box
-      display="flex"
-      alignItems="center"
-      justifyContent="center"
-      height={300}
-      sx={{ background: "#fff", display: shouldHide ? "none" : "flex" }}
-    >
+    <ChartWrapper sx={{ display: shouldHide ? "none" : "flex" }}>
       {isEmpty(chartData) ? (
-        <Box data-test="history-chart-empty-state">No Data!</Box>
+        <Box data-test="history-chart-empty-state">
+          <Typography variant="h3">No Data!</Typography>{" "}
+        </Box>
       ) : (
-        <ResponsiveContainer
-          data-test="history-chart-container"
-          width="100%"
-          height="100%"
-        >
-          <LineChart width={500} height={300} data={chartData}>
+        <ResponsiveContainer width="100%" height="100%">
+          <AreaChart
+            width={500}
+            height={400}
+            data={chartData}
+            margin={{
+              top: 25,
+              right: 0,
+              left: 0,
+              bottom: 0,
+            }}
+          >
+            <CartesianGrid strokeDasharray="1 3" />
             <XAxis dataKey="date" />
+            <YAxis />
             <Tooltip />
-            <Line type="monotone" dataKey="rate" stroke={PRIMARY_COLOR} />
-          </LineChart>
+            <Area
+              type="monotone"
+              dataKey="rate"
+              stroke={SECONDARY_COLOR}
+              fill={PRIMARY_COLOR}
+            />
+          </AreaChart>
         </ResponsiveContainer>
       )}
-    </Box>
+    </ChartWrapper>
   );
 }
 

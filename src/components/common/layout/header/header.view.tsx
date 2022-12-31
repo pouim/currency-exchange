@@ -1,21 +1,22 @@
 import { memo } from "react";
-import { Box, Button, Tabs } from "@mui/material";
+import { Box, Tabs } from "@mui/material";
 
 import { tabsData } from "../constants";
 import LinkTab from "../link-tab";
 import Logo from "../logo";
 import { a11yProps } from "./controller";
 import { HeaderProps } from "./types";
+import ToggleDarkMode from "components/ui/toggle-dark-mode";
+import { HeaderWrapper } from "./styles";
 
 function HeaderView(props: HeaderProps) {
   const { value } = props;
 
   return (
-    <Box
+    <HeaderWrapper
       display="flex"
       alignItems="flex-end"
       justifyContent="space-around"
-      sx={{ background: "#fff" }}
     >
       <Box display="flex" alignItems="center" gap={1} height={50}>
         <Logo />
@@ -38,8 +39,8 @@ function HeaderView(props: HeaderProps) {
         </Tabs>
       </Box>
 
-      <Button>Logout</Button>
-    </Box>
+      <ToggleDarkMode />
+    </HeaderWrapper>
   );
 }
 

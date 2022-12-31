@@ -1,7 +1,7 @@
-import { Box, ThemeOptions } from "@mui/material";
+import { Box } from "@mui/material";
 import { styled } from "@mui/system";
 
-export const Wrapper = styled(Box)((theme: ThemeOptions) => ({
+export const Wrapper = styled(Box)(() => ({
   width: "100%",
   display: "flex",
   flexDirection: "column",

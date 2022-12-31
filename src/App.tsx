@@ -1,11 +1,17 @@
 import { BrowserRouter } from "react-router-dom";
+import { ThemeProvider } from "@emotion/react";
 
 import Layout from "components/common/layout";
+import { useCreateCustomTheme } from "themes";
 
 function App() {
+  const { theme } = useCreateCustomTheme();
+
   return (
     <BrowserRouter>
-      <Layout />
+      <ThemeProvider theme={theme}>
+        <Layout />
+      </ThemeProvider>
     </BrowserRouter>
   );
 }

@@ -32,14 +32,11 @@ function Actions({ data }: TableActionProps) {
   }, [data, navigate]);
 
   return (
-    <Box display="flex" gap={5}>
+    <Box display="flex" gap={5} sx={{ opacity: 0 }}>
       <Button
         onClick={handleView}
         size="small"
         variant="text"
-        sx={{
-          fontSize: 12,
-        }}
         startIcon={<ViewIcon />}
         data-test="view-action-button"
       >
@@ -50,9 +47,6 @@ function Actions({ data }: TableActionProps) {
         size="small"
         color="warning"
         variant="text"
-        sx={{
-          fontSize: 12,
-        }}
         startIcon={<DeleteIcon />}
         data-test="delete-action-button"
       >
