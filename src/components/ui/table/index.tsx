@@ -23,12 +23,14 @@ function AppTable(props: AppTableProps) {
     containerHeight = 250,
     style,
     children,
+    dataTest
   } = props;
 
   return (
     <TableContainer
       component={Paper}
       sx={{ height: containerHeight, ...style }}
+      data-test={`${dataTest}-table`}
     >
       <Table stickyHeader aria-label="simple table">
         {isLoading ? (
@@ -46,6 +48,7 @@ function AppTable(props: AppTableProps) {
             alignItems="center"
             justifyContent="center"
             height={250}
+            data-test={`${dataTest}-table-empty-state`}
           >
             {isEmptyMessage}
           </Box>
@@ -54,7 +57,7 @@ function AppTable(props: AppTableProps) {
             <TableHead>
               <TableRow>
                 {headerCells.map((header) => (
-                  <TableCell sx={{color: SECONDARY_TEXT_COLOR}} key={header}>
+                  <TableCell sx={{ color: SECONDARY_TEXT_COLOR }} key={header}>
                     {capitalize(header)}
                   </TableCell>
                 ))}

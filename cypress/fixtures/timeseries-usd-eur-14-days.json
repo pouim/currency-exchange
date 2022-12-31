@@ -1,0 +1,28 @@
+{
+  "motd": {
+    "msg": "If you or your company use this project or like what we doing, please consider backing us so we can continue maintaining and evolving this project.",
+    "url": "https://exchangerate.host/#/donate"
+  },
+  "success": true,
+  "timeseries": true,
+  "base": "USD",
+  "start_date": "2022-12-16",
+  "end_date": "2022-12-30",
+  "rates": {
+    "2022-12-16": { "EUR": 0.943127 },
+    "2022-12-17": { "EUR": 0.944338 },
+    "2022-12-18": { "EUR": 0.944997 },
+    "2022-12-19": { "EUR": 0.942865 },
+    "2022-12-20": { "EUR": 0.941617 },
+    "2022-12-21": { "EUR": 0.942394 },
+    "2022-12-22": { "EUR": 0.943057 },
+    "2022-12-23": { "EUR": 0.937971 },
+    "2022-12-24": { "EUR": 0.937685 },
+    "2022-12-25": { "EUR": 0.941988 },
+    "2022-12-26": { "EUR": 0.939737 },
+    "2022-12-27": { "EUR": 0.939477 },
+    "2022-12-28": { "EUR": 0.941701 },
+    "2022-12-29": { "EUR": 0.937856 },
+    "2022-12-30": { "EUR": 0.937763 }
+  }
+}

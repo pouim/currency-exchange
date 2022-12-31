@@ -1,0 +1,12 @@
+{
+  "motd": {
+    "msg": "If you or your company use this project or like what we doing, please consider backing us so we can continue maintaining and evolving this project.",
+    "url": "https://exchangerate.host/#/donate"
+  },
+  "success": true,
+  "query": { "from": "USD", "to": "EUR", "amount": 3500 },
+  "info": { "rate": 0.937856 },
+  "historical": false,
+  "date": "2022-12-29",
+  "result": 3282.495234
+}

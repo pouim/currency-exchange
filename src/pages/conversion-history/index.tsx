@@ -14,7 +14,12 @@ function ConversionHistory() {
   return (
     <Panel>
       <Box width={{ xs: "90%", lg: "70%", height: "100vh" }}>
-        <Typography variant="h1" color="text.primary" mb={2}>
+        <Typography
+          variant="h1"
+          color="text.primary"
+          mb={2}
+          data-test="conversion-history-title"
+        >
           Conversion History
         </Typography>
 
@@ -22,11 +27,12 @@ function ConversionHistory() {
           containerHeight={400}
           isTableEmpty={isEmpty(data)}
           headerCells={headerCells}
+          dataTest="conversion-history"
         >
           {data.map((conversion) => {
             const { timestamp, fromSymbol, toSymbol, amount } = conversion;
             return (
-              <CustomTableRow>
+              <CustomTableRow data-test="conversion-history-table-row">
                 <TableCell>{convertUnixTimestamp(timestamp)}</TableCell>
                 <TableCell>{`Converted an amount of ${amount} from ${fromSymbol} to ${toSymbol}`}</TableCell>
                 <TableCell sx={{ opacity: 0 }}>

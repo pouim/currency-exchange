@@ -6,7 +6,15 @@ import { LinkTabProps } from "./types";
 function LinkTab(props: LinkTabProps) {
   const { pathName, label, ...rest } = props;
 
-  return <Tab {...rest} component={Link} to={pathName} label={label} />;
+  return (
+    <Tab
+      {...rest}
+      component={Link}
+      to={pathName}
+      label={label}
+      data-test={`${pathName}-tab`}
+    />
+  );
 }
 
 export default LinkTab;

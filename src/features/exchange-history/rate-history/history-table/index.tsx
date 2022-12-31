@@ -15,9 +15,10 @@ function HistoryTable(props: HistoryTableProps) {
       headerCells={["Data", "Exchange rate"]}
       containerHeight={300}
       style={{ display: shouldHide ? "none" : "" }}
+      dataTest="historical-rate"
     >
       {tableData.map(({ date, rate }, index) => (
-        <CustomTableRow key={index}>
+        <CustomTableRow key={index} data-test="historical-table-body-row">
           <TableCell>{date}</TableCell>
           <TableCell>{rate}</TableCell>
         </CustomTableRow>

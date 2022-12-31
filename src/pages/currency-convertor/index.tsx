@@ -6,7 +6,7 @@ import { Wrapper } from "./styles";
 function CurrencyConvertor() {
   return (
     <Panel>
-      <Wrapper>
+      <Wrapper data-test="currency-convertor-page">
         <Exchange />
         <ExchangeHistory />
       </Wrapper>

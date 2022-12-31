@@ -8,4 +8,5 @@ export interface AppTableProps {
   children?: ReactNode;
   style?: CSSProperties;
   containerHeight?: number;
+  dataTest?: string;
 }

@@ -41,6 +41,7 @@ function Actions({ data }: TableActionProps) {
           fontSize: 12,
         }}
         startIcon={<ViewIcon />}
+        data-test="view-action-button"
       >
         View
       </Button>
@@ -53,6 +54,7 @@ function Actions({ data }: TableActionProps) {
           fontSize: 12,
         }}
         startIcon={<DeleteIcon />}
+        data-test="delete-action-button"
       >
         Delete from history
       </Button>

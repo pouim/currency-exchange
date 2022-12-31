@@ -120,7 +120,11 @@ function Convertor() {
 
   return (
     <Box>
-      <Typography variant="h1" color="text.primary">
+      <Typography
+        variant="h1"
+        color="text.primary"
+        data-test="convertor-page-title"
+      >
         I want to convert
       </Typography>
       <ConvertorWrapper>
@@ -132,6 +136,7 @@ function Convertor() {
           label="Amount"
           type="number"
           required
+          data-test="amount-field"
         />
 
         <Box display="flex" alignItems="flex-end" gap="2%">
@@ -141,6 +146,7 @@ function Convertor() {
             label="From"
             options={allSymbolsData}
             required
+            dataTest="from-field"
           />
           <Button
             onClick={handleToggleCurrencies}
@@ -151,6 +157,7 @@ function Convertor() {
               minWidth: 10,
               padding: "5px 8px",
             }}
+            data-test="toggle-currencies-button"
           >
             {" "}
             <CompareArrowsIcon />
@@ -162,6 +169,7 @@ function Convertor() {
             label="To"
             options={allSymbolsData}
             required
+            dataTest="to-field"
           />
         </Box>
 
@@ -173,6 +181,7 @@ function Convertor() {
           }
           type="submit"
           disabled={!isAllValuesTruthy({ amount, fromSymbol, toSymbol })}
+          data-test="convert-button"
         >
           Convert
         </Button>

@@ -98,10 +98,17 @@ function RateHistory() {
             labelId="duration"
             id="duration"
             label="duration"
+            data-test="duration-field"
           >
-            <MenuItem value={7}>7 days</MenuItem>
-            <MenuItem value={14}>14 days</MenuItem>
-            <MenuItem value={30}>30 days</MenuItem>
+            <MenuItem data-test="duration-list-item" value={7}>
+              7 days
+            </MenuItem>
+            <MenuItem data-test="duration-list-item" value={14}>
+              14 days
+            </MenuItem>
+            <MenuItem data-test="duration-list-item" value={30}>
+              30 days
+            </MenuItem>
           </Select>
         </FormControl>
 
@@ -113,8 +120,18 @@ function RateHistory() {
             onChange={handleChangeViewMode}
             name="mode"
           >
-            <FormControlLabel value="table" control={<Radio />} label="table" />
-            <FormControlLabel value="chart" control={<Radio />} label="chart" />
+            <FormControlLabel
+              data-test="table-mode-radio-button"
+              value="table"
+              control={<Radio />}
+              label="table"
+            />
+            <FormControlLabel
+              data-test="chart-mode-radio-button"
+              value="chart"
+              control={<Radio />}
+              label="chart"
+            />
           </RadioGroup>
         </FormControl>
       </Box>

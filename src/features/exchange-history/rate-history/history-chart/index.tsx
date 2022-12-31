@@ -18,9 +18,13 @@ function HistoryChart(props: HistoryChartProps) {
       sx={{ background: "#fff", display: shouldHide ? "none" : "flex" }}
     >
       {isEmpty(chartData) ? (
-        <Box>No Data!</Box>
+        <Box data-test="history-chart-empty-state">No Data!</Box>
       ) : (
-        <ResponsiveContainer width="100%" height="100%">
+        <ResponsiveContainer
+          data-test="history-chart-container"
+          width="100%"
+          height="100%"
+        >
           <LineChart width={500} height={300} data={chartData}>
             <XAxis dataKey="date" />
             <Tooltip />

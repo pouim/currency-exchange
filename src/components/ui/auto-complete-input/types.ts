@@ -4,4 +4,5 @@ export interface AutoCompleteInputProps {
   options: string[];
   value: string;
   setValue: (value: string) => void;
+  dataTest?: string;
 }

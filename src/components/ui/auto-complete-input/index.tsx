@@ -5,7 +5,7 @@ import { AutoCompleteInputProps } from "./types";
 const filter = createFilterOptions<string>();
 
 function AutoCompleteInput(props: AutoCompleteInputProps) {
-  const { label, required = false, options, value, setValue } = props;
+  const { label, required = false, options, value, setValue, dataTest } = props;
 
   return (
     <Autocomplete
@@ -33,8 +33,10 @@ function AutoCompleteInput(props: AutoCompleteInputProps) {
           label={label}
           required={required}
           {...params}
+          data-test={`${dataTest}-input`}
         />
       )}
+      data-test={dataTest}
     />
   );
 }
