@@ -4,7 +4,6 @@ import CompareArrowsIcon from "@mui/icons-material/CompareArrows";
 import { v4 as uuidv4 } from "uuid";
 
 import AutoCompleteInput from "components/ui/auto-complete-input";
-import { PRIMARY_COLOR } from "themes/constants";
 import { ConvertorWrapper } from "./styles";
 import { useGetFormData } from "./store";
 import { useUpdateFormFields } from "./store/actions";
