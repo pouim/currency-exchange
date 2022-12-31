@@ -31,6 +31,7 @@ export const theme: ThemeOptions = createTheme({
     h1: {
       fontSize: 20,
       fontWeight: "bold",
+      color: PRIMARY_TEXT_COLOR,
 
       "@media (min-width:700px)": {
         fontSize: 36,
@@ -42,13 +43,19 @@ export const theme: ThemeOptions = createTheme({
     },
 
     h2: {
-      fontSize: 24,
+      fontSize: 18,
       fontWeight: "bold",
+      color: PRIMARY_TEXT_COLOR,
+
+      "@media (min-width:1200px)": {
+        fontSize: 24,
+      },
     },
 
     h3: {
       fontSize: 16,
       fontFamily: "Roboto Regular",
+      color: PRIMARY_TEXT_COLOR,
     },
   },
 
