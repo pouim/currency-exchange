@@ -71,6 +71,7 @@ function ConversionForm(props: ConversionFormProps) {
         />
 
         <Button
+          name="toggle-currencies-button"
           onClick={handleToggleCurrencies}
           variant="contained"
           sx={{
@@ -93,6 +94,7 @@ function ConversionForm(props: ConversionFormProps) {
       </Box>
 
       <Button
+        name="convert-button"
         sx={{ height: 35 }}
         variant="contained"
         type="submit"

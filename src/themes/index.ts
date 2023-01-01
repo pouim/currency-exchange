@@ -181,7 +181,7 @@ export function useCreateCustomTheme() {
       MuiButton: {
         styleOverrides: {
           root: {
-            fontSize: 8,
+            fontSize: 10,
 
             "@media (min-width:700px)": {
               fontSize: 12,
