@@ -7,16 +7,24 @@ import { useDeleteConversion } from "../store/actions";
 import { TableActionProps } from "./types";
 import { Box, Button } from "@mui/material";
 import { AppPathNames } from "config/constants";
+import { useOpenDialog } from "components/ui/dialog/store.ts/actions";
 
 function Actions({ data }: TableActionProps) {
   const navigate = useNavigate();
 
+  const openDialog = useOpenDialog();
   const deleteConversion = useDeleteConversion();
 
   const handleDeleteConversion = useCallback(() => {
     const { key } = data;
-    deleteConversion(key);
-  }, [data, deleteConversion]);
+
+    openDialog({
+      title: "Delete the item?",
+      bodyText:
+        "This conversion will be completely deleted from the conversion history!",
+      onConfirm: () => deleteConversion(key),
+    });
+  }, [data, deleteConversion, openDialog]);
 
   const handleView = useCallback(() => {
     const { fromSymbol, toSymbol, amount } = data;

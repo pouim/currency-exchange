@@ -3,6 +3,7 @@ import { Box } from "@mui/material";
 
 import { Routings } from "config/routes";
 import { Header } from "./header";
+import CustomDialog from "components/ui/dialog";
 
 function Layout() {
   return (
@@ -13,6 +14,7 @@ function Layout() {
           <Route key={path} path={path} element={element} />
         ))}
       </Routes>
+      <CustomDialog />
     </Box>
   );
 }

@@ -2,20 +2,22 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import storage from "redux-persist/lib/storage";
 import { persistReducer, persistStore } from "redux-persist";
 
-import userConfigsReducer from 'config/store/index';
+import userConfigsReducer from "config/store/index";
+import dialogReducer from "components/ui/dialog/store.ts/index";
 import conversionHistoryReducer from "pages/conversion-history/store/index";
 import { exchangeApi } from "services/exchange";
 
 const persistConfig = {
   key: "root",
   storage,
-  blacklist: ["statistics", 'api'],
+  blacklist: ["statistics", "dialog", "api"],
 };
 
 const rootReducer = combineReducers({
   [exchangeApi.reducerPath]: exchangeApi.reducer,
   userConfigs: userConfigsReducer,
   conversionHistory: conversionHistoryReducer,
+  dialog: dialogReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

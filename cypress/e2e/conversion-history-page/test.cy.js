@@ -42,6 +42,13 @@ describe("test conversion history section", () => {
       .find('[data-test="delete-action-button"]')
       .click();
 
+    // confirm dialog should be open
+    cy.get('[data-test="dialog"]').should("have.length", 1);
+
+    
+    // confirm delete
+    cy.get('[data-test="dialog-confirm-button"]').click();
+
     //it should be 2 items left
     cy.get('[data-test="conversion-history-table-row"]').should(
       "have.length",
