@@ -13,7 +13,7 @@ function ConversionHistory() {
 
   return (
     <Panel>
-      <Box width={{ xs: "100%", lg: "80%" }}>
+      <Box component="section" width={{ xs: "100%", lg: "80%" }}>
         <Typography
           variant="h1"
           color="text.primary"

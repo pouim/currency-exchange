@@ -18,7 +18,7 @@ function CurrencyConvertor() {
 
   return (
     <Panel>
-      <Wrapper data-test="currency-convertor-page">
+      <Wrapper component="section" data-test="currency-convertor-page">
         <FormProvider {...methods}>
           <Exchange />
           <ExchangeHistory />

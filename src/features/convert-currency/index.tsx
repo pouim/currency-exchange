@@ -21,7 +21,7 @@ function Convertor() {
   const allSymbolsData = Object.keys(data?.symbols ?? []);
 
   return (
-    <Box px={{ xs: 1 }}>
+    <Box component='section' px={{ xs: 1 }}>
       <Typography
         variant="h1"
         color="text.primary"

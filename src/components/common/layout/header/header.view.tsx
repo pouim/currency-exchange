@@ -17,11 +17,19 @@ function HeaderView(props: HeaderProps) {
       display="flex"
       alignItems="flex-end"
       justifyContent="space-around"
+      component="header"
     >
-      <Box display="flex" alignItems="center" gap={1} height={50}>
+      <Box
+        component="nav"
+        display="flex"
+        alignItems="center"
+        gap={1}
+        height={50}
+      >
         <Logo />
 
         <Tabs
+          component="nav"
           value={value}
           aria-label="basic tabs example"
           sx={{ marginLeft: 5 }}

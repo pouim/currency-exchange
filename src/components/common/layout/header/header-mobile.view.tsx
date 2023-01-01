@@ -13,7 +13,7 @@ function HeaderMobileView(props: HeaderProps) {
   const { value } = props;
 
   return (
-    <HeaderWrapper>
+    <HeaderWrapper component="header">
       <Box
         display="flex"
         alignItems="center"
@@ -28,6 +28,7 @@ function HeaderMobileView(props: HeaderProps) {
       <Divider />
 
       <Tabs
+        component='nav'
         value={value}
         variant="fullWidth"
         aria-label="basic tabs example"

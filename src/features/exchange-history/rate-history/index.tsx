@@ -75,7 +75,7 @@ function RateHistory() {
   );
 
   return (
-    <Box>
+    <Box component='section'>
       <Box display="flex" alignItems="center" justifyContent="space-between">
         <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
           <InputLabel id="duration">Duration</InputLabel>

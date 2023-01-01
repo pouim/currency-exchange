@@ -10,6 +10,7 @@ function ConversionResult(props: ConversionResultProps) {
 
   return (
     <Box
+      component="section"
       display="flex"
       flexDirection="column"
       alignItems="center"

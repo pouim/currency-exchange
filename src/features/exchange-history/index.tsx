@@ -6,7 +6,7 @@ import { Wrapper } from "./styles";
 
 function ExchangeHistory() {
   return (
-    <Wrapper>
+    <Wrapper component="section">
       <Box width={{ lg: "130%" }}>
         <Typography variant="h2" mb={2} ml={{ xs: 1 }}>
           Exchange History

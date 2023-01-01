@@ -3,7 +3,7 @@ import { PanelProps } from "./types";
 
 function Panel({ children }: PanelProps) {
   return (
-    <PanelWrapper py={5} px={{ s: 1, md: 0 }}>
+    <PanelWrapper component="main" py={5}>
       {children}
     </PanelWrapper>
   );
