@@ -1,10 +1,12 @@
+import { cyan } from "@mui/material/colors";
+
 describe("test historical rate section", () => {
   beforeEach(() => {
     cy.clock(new Date("2022-12-30T00:00:00Z").getTime(), ["Date"]);
   });
 
 
-  it("show historical rate in the table when select currencies", () => {
+  it("show historical rate in the table when convert currencies", () => {
     cy.intercept("GET", "/symbols", {
       fixture: "symbols.json",
     }).as("allValidSymbols");
@@ -50,6 +52,9 @@ describe("test historical rate section", () => {
       .type("EUR")
       .type("{downarrow}")
       .type("{enter}");
+   
+    // convert currencies  
+    cy.convert("USD", "EUR", 3500);   
 
     cy.get('[data-test="historical-table-body-row"]').should("have.length", 8);
 
