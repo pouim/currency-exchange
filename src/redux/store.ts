@@ -3,22 +3,18 @@ import storage from "redux-persist/lib/storage";
 import { persistReducer, persistStore } from "redux-persist";
 
 import userConfigsReducer from 'config/store/index';
-import currencyConvertorFormReducer from "features/convert-currency/store/index";
 import conversionHistoryReducer from "pages/conversion-history/store/index";
-import statisticsReducer from "features/exchange-history/store/index";
 import { exchangeApi } from "services/exchange";
 
 const persistConfig = {
   key: "root",
   storage,
-  blacklist: ["statistics"],
+  blacklist: ["statistics", 'api'],
 };
 
 const rootReducer = combineReducers({
   [exchangeApi.reducerPath]: exchangeApi.reducer,
   userConfigs: userConfigsReducer,
-  form: currencyConvertorFormReducer,
-  statistics: statisticsReducer,
   conversionHistory: conversionHistoryReducer,
 });
 

@@ -1,8 +1,7 @@
 export interface AutoCompleteInputProps {
   label: string;
+  name: string;
   required?: boolean;
   options: string[];
-  value: string;
-  setValue: (value: string) => void;
   dataTest?: string;
 }

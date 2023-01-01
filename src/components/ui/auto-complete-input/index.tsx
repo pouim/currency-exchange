@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+import { useFormContext } from "react-hook-form";
 import { Autocomplete, createFilterOptions, TextField } from "@mui/material";
 
 import { AutoCompleteInputProps } from "./types";
@@ -5,7 +7,22 @@ import { AutoCompleteInputProps } from "./types";
 const filter = createFilterOptions<string>();
 
 function AutoCompleteInput(props: AutoCompleteInputProps) {
-  const { label, required = false, options, value, setValue, dataTest } = props;
+  const { label, name, required = false, options, dataTest } = props;
+
+  const { setValue, watch } = useFormContext();
+
+  const [currentValue, setCurrentValue] = useState("");
+
+  // Watch the form values changes
+  // for toggle currencies feature
+  useEffect(() => {
+    const subscription = watch((values) => {
+      const newValue = values[name] ?? "";
+
+      setCurrentValue(newValue);
+    });
+    return () => subscription.unsubscribe();
+  }, [name, watch]);
 
   return (
     <Autocomplete
@@ -15,9 +32,9 @@ function AutoCompleteInput(props: AutoCompleteInputProps) {
         return filtered;
       }}
       onChange={(_, value) => {
-        setValue(value ?? "");
+        setValue(name, value);
       }}
-      value={value}
+      value={currentValue}
       selectOnFocus
       clearOnBlur
       handleHomeEndKeys
@@ -29,11 +46,12 @@ function AutoCompleteInput(props: AutoCompleteInputProps) {
       freeSolo
       renderInput={(params) => (
         <TextField
+          required={required}
+          name={name}
           variant="standard"
           label={label}
-          required={required}
-          {...params}
           data-test={`${dataTest}-input`}
+          {...params}
         />
       )}
       data-test={dataTest}

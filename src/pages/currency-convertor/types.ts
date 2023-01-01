@@ -3,3 +3,10 @@ export type ConversionFormData = {
   from: string;
   to: string;
 };
+
+export type FormFields = {
+  amount: string;
+  fromSymbol: string;
+  toSymbol: string;
+  duration: number;
+};
